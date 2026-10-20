@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Japan NYE 26/27</title>
+  <meta name="theme-color" content="#1a1a1a">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --paper: #faf9f7;
+      --stone: #6b6b6b;
+      --mist: #e8e6e3;
+      --mist2: #f1efec;
+      --accent: #c41e3a;
+      --tokyo: #2d5a7b;
+      --niseko: #4a7c6f;
+      --fukuoka: #b5563a;
+      --card: #ffffff;
+      --booked: #15803d;
+      --tobook: #b45309;
+      --plan: #6b6b6b;
+      --skip: #9ca3af;
+      --gold: #a16207;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.55;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    button { font-family: inherit; }
+
+    /* Header */
+    header {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 2.6rem 1.25rem 1.6rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 20% 0%, rgba(45,90,123,0.45), transparent 55%),
+                  radial-gradient(ellipse at 85% 100%, rgba(181,86,58,0.35), transparent 55%);
+      pointer-events: none;
+    }
+    header > * { position: relative; z-index: 1; }
+    header h1 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2.6rem, 9vw, 4.4rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 0.55rem;
+    }
+    header h1 em { font-style: italic; color: rgba(250,249,247,0.75); }
+    header .sub {
+      color: rgba(250,249,247,0.6);
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .hero-stats {
+      display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap;
+      margin-top: 1.1rem;
+    }
+    .stat {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.78rem;
+      color: rgba(250,249,247,0.85);
+      display: flex; align-items: center; gap: 0.45rem;
+    }
+    .stat b { font-weight: 600; color: #fff; }
+    .stat .dot { width: 7px; height: 7px; border-radius: 50%; }
+
+    /* Sync banner */
+    .sync-banner {
+      background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+      border-bottom: 1px solid #86efac;
+      padding: 0.45rem 1rem;
+      display: flex; justify-content: center; align-items: center; gap: 0.6rem;
+      font-size: 0.78rem;
+      position: sticky; top: 0; z-index: 200;
+      white-space: nowrap; overflow: hidden;
+    }
+    .sync-banner #sync-status { overflow: hidden; text-overflow: ellipsis; }
+    .sync-banner.offline { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-color: #f59e0b; }
+    .sync-banner.syncing { background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%); border-color: #38bdf8; }
+    .sync-banner.local { background: var(--mist2); border-color: var(--mist); color: var(--stone); }
+    .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--booked); animation: pulse 2s infinite; }
+    .sync-banner.offline .sync-dot { background: var(--tobook); animation: none; }
+    .sync-banner.syncing .sync-dot { background: #0ea5e9; animation: pulse 0.5s infinite; }
+    .sync-banner.local .sync-dot { background: var(--stone); animation: none; }
+    .sync-banner .me { margin-left: auto; cursor: pointer; font-weight: 600; text-decoration: underline dotted; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    /* Nav */
+    nav {
+      position: sticky; top: 33px;
+      background: rgba(250,249,247,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--mist);
+      z-index: 100;
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+    }
+    nav::-webkit-scrollbar { display: none; }
+    nav ul { display: flex; list-style: none; padding: 0 0.75rem; min-width: max-content; align-items: stretch; }
+    nav a {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 0.6rem 0.7rem 0.5rem;
+      text-decoration: none; color: var(--stone);
+      font-size: 0.78rem; font-weight: 500; white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+      min-width: 44px;
+    }
+    nav a small { font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; }
+    nav a b { font-size: 0.95rem; font-weight: 600; }
+    nav a:hover, nav a.active { color: var(--ink); }
+    nav a.tokyo.active, nav a.tokyo:hover { border-color: var(--tokyo); }
+    nav a.niseko.active, nav a.niseko:hover { border-color: var(--niseko); }
+    nav a.fukuoka.active, nav a.fukuoka:hover { border-color: var(--fukuoka); }
+    nav a.meta.active, nav a.meta:hover { border-color: var(--ink); }
+    nav a.today b::after { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-left: 4px; vertical-align: middle; }
+    nav li.sep { width: 1px; background: var(--mist); margin: 0.6rem 0.3rem; }
+
+    main { max-width: 820px; margin: 0 auto; padding: 1.25rem 1rem 5rem; }
+    .panel { display: none; animation: fade 0.25s ease; }
+    .panel.active { display: block; }
+    @keyframes fade { from { opacity: 0; transform: translateY(4px);} to { opacity: 1; transform: none; } }
+
+    /* Day header */
+    .day-header {
+      display: flex; align-items: flex-start; gap: 0.9rem;
+      margin-bottom: 1rem; padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .day-number { font-family: 'Instrument Serif', serif; font-size: 3rem; line-height: 0.9; min-width: 2.2ch; }
+    .day-info { flex: 1; }
+    .day-date { font-weight: 600; font-size: 1.05rem; }
+    .day-subtitle { color: var(--stone); font-size: 0.85rem; }
+    .day-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.4rem; font-size: 0.72rem; color: var(--stone); }
+    .day-meta span { background: var(--mist2); border-radius: 4px; padding: 0.1rem 0.45rem; }
+    .city-badge {
+      font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 0.25rem 0.7rem; border-radius: 20px; color: white; align-self: center; white-space: nowrap;
+    }
+    .city-badge.tokyo { background: var(--tokyo); }
+    .city-badge.niseko { background: var(--niseko); }
+    .city-badge.fukuoka { background: var(--fukuoka); }
+
+    .day-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      border: 1px solid var(--mist); background: var(--card); color: var(--ink);
+      border-radius: 6px; padding: 0.35rem 0.7rem; font-size: 0.78rem; font-weight: 500;
+      text-decoration: none; cursor: pointer; transition: background 0.15s, border-color 0.15s;
+      line-height: 1.2;
+    }
+    .btn:hover { background: var(--mist2); border-color: #d6d3cf; }
+    .btn.dark { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    .btn.dark:hover { background: #333; }
+    .btn svg { width: 13px; height: 13px; }
+
+    /* Filters */
+    .filters { display: flex; gap: 0.35rem; flex-wrap: wrap; margin-bottom: 1rem; align-items: center; }
+    .chip {
+      border: 1px solid var(--mist); background: var(--card); border-radius: 999px;
+      padding: 0.22rem 0.7rem; font-size: 0.74rem; cursor: pointer; color: var(--stone); font-weight: 500;
+      user-select: none;
+    }
+    .chip.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    .filters .spacer { flex: 1; }
+
+    /* Hotel box */
+    .stay-box {
+      background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f4 100%);
+      border: 1px solid var(--mist); border-left: 3px solid var(--ink);
+      border-radius: 0 8px 8px 0; padding: 0.75rem 1rem; margin-bottom: 1rem;
+      font-size: 0.85rem; display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;
+    }
+    .stay-box b { font-weight: 600; }
+    .stay-box .muted { color: var(--stone); }
+    .stay-box .btn { margin-left: auto; }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 1.4rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0.6rem; bottom: 0.6rem; width: 1px; background: var(--mist); }
+    .item { position: relative; padding-bottom: 1.1rem; }
+    .item:last-child { padding-bottom: 0; }
+    .item::before {
+      content: ''; position: absolute; left: -1.4rem; top: 0.95rem;
+      width: 7px; height: 7px; border-radius: 50%; background: var(--mist); transform: translateX(-3px);
+    }
+    .item[data-status="booked"]::before { background: var(--booked); width: 9px; height: 9px; transform: translateX(-4px); }
+    .item[data-status="tobook"]::before { background: var(--tobook); width: 9px; height: 9px; transform: translateX(-4px); }
+    .item.hl::before { box-shadow: 0 0 0 3px rgba(196,30,58,0.18); background: var(--accent); }
+    .item.hidden { display: none; }
+    .item[data-status="skip"] .card { opacity: 0.55; }
+    .item[data-status="skip"] .title { text-decoration: line-through; }
+    .card {
+      background: var(--card); border: 1px solid var(--mist); border-radius: 10px;
+      padding: 0.8rem 0.95rem 0.7rem;
+      transition: box-shadow 0.15s, border-color 0.15s;
+    }
+    .item.hl .card { border-color: rgba(196,30,58,0.35); }
+    .card:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .card-top { display: flex; align-items: baseline; gap: 0.6rem; }
+    .time { font-size: 0.75rem; color: var(--stone); font-variant-numeric: tabular-nums; min-width: 3.2rem; }
+    .title { font-weight: 600; font-size: 0.98rem; flex: 1; }
+    .title .jp { font-weight: 400; color: var(--stone); font-size: 0.82rem; margin-left: 0.3rem; }
+    .desc { font-size: 0.86rem; color: #444; margin-top: 0.3rem; }
+    .warn { font-size: 0.78rem; color: var(--tobook); margin-top: 0.35rem; display: flex; gap: 0.35rem; align-items: flex-start; }
+    .warn::before { content: '!'; font-weight: 700; border: 1.5px solid currentColor; border-radius: 50%; width: 14px; height: 14px; font-size: 0.6rem; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .alts { font-size: 0.78rem; color: var(--stone); margin-top: 0.3rem; }
+    .alts b { color: var(--ink); font-weight: 600; }
+
+    .editable { cursor: text; border-radius: 3px; transition: background 0.2s; }
+    .editable:hover { background: rgba(0,0,0,0.04); }
+    .editable:focus { outline: none; background: #fff3cd; }
+    .editable.synced { animation: syncFlash 0.6s ease; }
+    .editable[data-placeholder]:empty::before { content: attr(data-placeholder); color: #b0aca6; font-style: italic; }
+    @keyframes syncFlash { 0% { background: #bbf7d0; } 100% { background: transparent; } }
+
+    .card-bottom { display: flex; align-items: center; gap: 0.3rem; flex-wrap: wrap; margin-top: 0.55rem; }
+    .tag {
+      display: inline-block; font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 0.16rem 0.5rem; border-radius: 4px; font-weight: 600;
+    }
+    .tag-food { background: #fef3e2; color: #b45309; }
+    .tag-bars { background: #ede9fe; color: #6d28d9; }
+    .tag-explore { background: #e0f2fe; color: #0369a1; }
+    .tag-shop { background: #fce7f3; color: #be185d; }
+    .tag-transport { background: #f3f4f6; color: #4b5563; }
+    .tag-ski { background: #dbeafe; color: #1d4ed8; }
+    .tag-relax { background: #dcfce7; color: #166534; }
+    .tag-stay { background: #f5f5f4; color: #44403c; }
+    .tag-who { background: var(--mist2); color: var(--ink); font-weight: 500; text-transform: none; letter-spacing: 0; }
+    .tag-who.sushi { background: #fef9c3; color: #854d0e; }
+    .tag-who.others { background: #e0e7ff; color: #3730a3; }
+    .tag-who.opt { background: transparent; border: 1px dashed #c8c5c0; color: var(--stone); }
+    .tag-who.couple { background: #e3efe9; color: #2f5d50; }
+    .tag-price { background: transparent; color: var(--stone); font-weight: 500; letter-spacing: 0.02em; text-transform: none; }
+
+    .status {
+      cursor: pointer; user-select: none; transition: transform 0.1s;
+      font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.16rem 0.55rem; border-radius: 4px; font-weight: 700; border: none;
+    }
+    .status:active { transform: scale(0.94); }
+    .status.booked { background: #dcfce7; color: #15803d; }
+    .status.tobook { background: #fef3c7; color: #b45309; }
+    .status.plan { background: var(--mist2); color: var(--stone); }
+    .status.skip { background: #f3f4f6; color: #9ca3af; text-decoration: line-through; }
+
+    .actions { margin-left: auto; display: flex; gap: 0.3rem; align-items: center; }
+    .ibtn {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      border: 1px solid var(--mist); background: var(--card); border-radius: 6px;
+      padding: 0.22rem 0.5rem; font-size: 0.72rem; color: var(--ink); text-decoration: none; cursor: pointer;
+      line-height: 1.2;
+    }
+    .ibtn:hover { background: var(--mist2); }
+    .ibtn svg { width: 12px; height: 12px; }
+    .vote { border-color: transparent; background: var(--mist2); }
+    .vote.mine { background: #fee2e2; color: var(--accent); border-color: #fecaca; }
+    .vote .n { font-weight: 600; }
+    .voters { display: flex; margin-left: 2px; }
+    .av {
+      width: 18px; height: 18px; border-radius: 50%; background: var(--ink); color: var(--paper);
+      font-size: 0.58rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center;
+      margin-left: -5px; border: 1.5px solid var(--card);
+    }
+
+    /* Day notes */
+    .notes { margin-top: 1.5rem; }
+    .notes label { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--stone); margin-bottom: 0.35rem; }
+    .notes textarea {
+      width: 100%; min-height: 70px; border: 1px solid var(--mist); border-radius: 8px; padding: 0.6rem 0.75rem;
+      font-family: inherit; font-size: 0.88rem; background: var(--card); resize: vertical; color: var(--ink);
+    }
+    .notes textarea:focus { outline: none; border-color: #c8c5c0; background: #fffdf5; }
+
+    /* Overview */
+    h2.sec { font-family: 'Instrument Serif', serif; font-size: 1.8rem; font-weight: 400; margin: 0 0 0.75rem; letter-spacing: -0.01em; }
+    h3.sec { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); margin: 1.6rem 0 0.6rem; font-weight: 600; }
+    .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.6rem; }
+    .block {
+      border-radius: 10px; padding: 0.8rem 0.9rem; color: #fff; position: relative; overflow: hidden; min-height: 108px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .block.tokyo { background: var(--tokyo); } .block.niseko { background: var(--niseko); } .block.fukuoka { background: var(--fukuoka); }
+    .block .n { font-family: 'Instrument Serif', serif; font-size: 2rem; line-height: 1; position: absolute; top: 0.6rem; right: 0.8rem; opacity: 0.5; }
+    .block .city { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.8; }
+    .block .hotel { font-weight: 600; font-size: 0.95rem; margin-top: 0.1rem; }
+    .block .dates { font-size: 0.78rem; opacity: 0.85; }
+    .progress { height: 8px; background: var(--mist); border-radius: 99px; overflow: hidden; display: flex; margin: 0.4rem 0 0.3rem; }
+    .progress i { display: block; height: 100%; }
+    .progress .b { background: var(--booked); } .progress .t { background: var(--tobook); } .progress .p { background: #d6d3cf; }
+    .legend { display: flex; gap: 1rem; font-size: 0.75rem; color: var(--stone); flex-wrap: wrap; }
+    .legend span::before { content: ''; display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
+    .legend .lb::before { background: var(--booked); } .legend .lt::before { background: var(--tobook); } .legend .lp::before { background: #d6d3cf; } .legend .ls::before { background: var(--accent); }
+    .daygrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.5rem; }
+    .daycard {
+      background: var(--card); border: 1px solid var(--mist); border-radius: 10px; padding: 0.65rem 0.75rem; cursor: pointer; text-decoration: none; color: inherit;
+      border-top: 3px solid var(--mist); transition: transform 0.12s, box-shadow 0.12s;
+    }
+    .daycard:hover { transform: translateY(-1px); box-shadow: 0 3px 12px rgba(0,0,0,0.06); }
+    .daycard.tokyo { border-top-color: var(--tokyo); } .daycard.niseko { border-top-color: var(--niseko); } .daycard.fukuoka { border-top-color: var(--fukuoka); }
+    .daycard .d { font-weight: 600; font-size: 0.85rem; }
+    .daycard .t { font-size: 0.76rem; color: var(--stone); margin-top: 0.1rem; line-height: 1.35; }
+    .daycard .k { font-size: 0.7rem; margin-top: 0.4rem; color: var(--stone); }
+    .daycard .k b { color: var(--booked); font-weight: 600; }
+    .daycard .k i { color: var(--tobook); font-style: normal; font-weight: 600; }
+
+    table.flights { width: 100%; border-collapse: collapse; font-size: 0.85rem; background: var(--card); border: 1px solid var(--mist); border-radius: 8px; overflow: hidden; }
+    table.flights th, table.flights td { padding: 0.5rem 0.65rem; text-align: left; border-bottom: 1px solid var(--mist); vertical-align: top; }
+    table.flights th { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--stone); font-weight: 600; background: var(--mist2); }
+    table.flights tr:last-child td { border-bottom: none; }
+    table.flights td .editable { display: inline-block; min-width: 60px; }
+
+    /* People */
+    .people { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.5rem; }
+    .person { display: flex; align-items: center; gap: 0.5rem; background: var(--card); border: 1px solid var(--mist); border-radius: 8px; padding: 0.45rem 0.6rem; font-size: 0.85rem; }
+    .person .av { width: 24px; height: 24px; font-size: 0.68rem; margin: 0; }
+    .person .editable { flex: 1; }
+    .person.me { border-color: var(--ink); }
+
+    /* Checklist */
+    .check { display: flex; gap: 0.6rem; align-items: flex-start; padding: 0.55rem 0.2rem; border-bottom: 1px solid var(--mist); font-size: 0.86rem; cursor: pointer; }
+    .check:last-child { border-bottom: none; }
+    .check input { margin-top: 0.25rem; accent-color: var(--booked); width: 16px; height: 16px; flex-shrink: 0; cursor: pointer; }
+    .check.done .ct { text-decoration: line-through; color: var(--stone); }
+    .check .when { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); font-weight: 700; display: block; }
+    .check .cd { font-size: 0.78rem; color: var(--stone); }
+    .check a { color: var(--tokyo); }
+
+    /* Guide */
+    .ref { background: var(--card); border: 1px solid var(--mist); border-radius: 10px; padding: 0.9rem 1rem; margin-bottom: 0.75rem; font-size: 0.86rem; }
+    .ref h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem; }
+    .ref ul { list-style: none; }
+    .ref li { padding: 0.3rem 0; border-bottom: 1px dashed var(--mist); display: flex; gap: 0.5rem; align-items: baseline; }
+    .ref li:last-child { border-bottom: none; }
+    .ref li b { font-weight: 600; }
+    .ref li .m { margin-left: auto; white-space: nowrap; }
+    .ref li .d { color: var(--stone); font-size: 0.8rem; }
+    .ref p { color: #444; }
+    .ref p + p { margin-top: 0.4rem; }
+    .closed { color: var(--tobook); font-weight: 600; }
+    .open { color: var(--booked); font-weight: 600; }
+
+    /* Modal */
+    .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 500; padding: 1rem; }
+    .modal-bg.show { display: flex; }
+    .modal { background: var(--card); border-radius: 14px; padding: 1.25rem; max-width: 380px; width: 100%; }
+    .modal h3 { font-family: 'Instrument Serif', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 0.3rem; }
+    .modal p { font-size: 0.85rem; color: var(--stone); margin-bottom: 0.8rem; }
+    .modal .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+    .modal .opts button { border: 1px solid var(--mist); background: var(--paper); border-radius: 8px; padding: 0.55rem; font-size: 0.88rem; cursor: pointer; }
+    .modal .opts button:hover { border-color: var(--ink); }
+
+    .toast { position: fixed; bottom: 1.2rem; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--ink); color: var(--paper); padding: 0.55rem 0.9rem; border-radius: 8px; font-size: 0.8rem; opacity: 0; transition: all 0.25s; pointer-events: none; z-index: 600; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    footer { text-align: center; color: var(--stone); font-size: 0.72rem; padding: 2rem 1rem 3rem; }
+    footer a { color: var(--stone); }
+
+    @media (max-width: 560px) {
+      .time { min-width: 2.8rem; }
+      .card-top { flex-wrap: wrap; }
+      .actions { margin-left: 0; width: 100%; justify-content: flex-start; margin-top: 0.2rem; }
+      .stay-box .btn { margin-left: 0; }
+    }
+    @media print {
+      .sync-banner, nav, .day-actions, .filters, .actions, .notes, footer { display: none !important; }
+      .panel { display: block !important; page-break-after: always; }
+      .card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Japan <em>New Year</em> 26/27</h1>
+  <p class="sub">27 Dec 2026 to 10 Jan 2027 · Tokyo · Niseko · Fukuoka · Tokyo</p>
+  <div class="hero-stats">
+    <span class="stat" id="countdown"><b>…</b></span>
+    <span class="stat"><span class="dot" style="background:var(--tokyo)"></span>Tokyo <b>5 + 2 nts</b></span>
+    <span class="stat"><span class="dot" style="background:var(--niseko)"></span>Niseko <b>4 nts</b> · us 2</span>
+    <span class="stat"><span class="dot" style="background:var(--fukuoka)"></span>Fukuoka <b>3 nts</b></span>
+    <span class="stat">👥 <b>7</b></span>
+  </div>
+</header>
+
+<div class="sync-banner local" id="sync-banner">
+  <span class="sync-dot"></span>
+  <span id="sync-status">Connecting…</span>
+  <span class="me" id="me-chip" title="Change who you are">Who am I?</span>
+</div>
+
+<nav><ul id="nav"></ul></nav>
+
+<main id="main"></main>
+
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <h3>Who are you?</h3>
+    <p>Pick your name once. Your ♥ votes on restaurants and ideas will show with your initials for everyone.</p>
+    <div class="opts" id="who-opts"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<footer>
+  Tap any text to edit it. Tap a status to cycle Plan → To book → Booked → Skip. ♥ to vote. Everything syncs for all 7 of us.<br>
+  Day/route links open in Google Maps. Times are JST.
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script>
+/* =========================================================
+   DATA
+   ========================================================= */
+const TRIP_ID = 'japan-ny-2026';
+const TRIP_START = new Date('2026-12-27T00:00:00+09:00');
+const TRIP_END   = new Date('2027-01-10T23:59:59+09:00');
+
+const STAYS = [
+  { city: 'tokyo',   hotel: '1 Hotel Tokyo',          area: 'Akasaka Trust Tower, 2-17-22 Akasaka', dates: '27 Dec to 1 Jan', nights: 5, map: '1 Hotel Tokyo Akasaka Trust Tower', phone: '' },
+  { city: 'niseko',  hotel: 'Shiguchi',               area: '78-5 Hanazono, Kutchan (Vini + Ana only)', dates: '1 to 5 Jan', nights: 4, map: 'Shiguchi Hanazono Kutchan', phone: '+81 136-55-5235' },
+  { city: 'fukuoka', hotel: 'The Ritz-Carlton Fukuoka', area: '2-6-50 Daimyo, Chuo-ku', dates: '5 to 8 Jan', nights: 3, map: 'The Ritz-Carlton Fukuoka', phone: '' },
+  { city: 'tokyo',   hotel: 'Janu Tokyo',             area: 'Azabudai Hills, 1-2-2 Azabudai', dates: '8 to 10 Jan', nights: 2, map: 'Janu Tokyo Azabudai Hills', phone: '' },
+];
+
+const FLIGHTS = [
+  { id: 'f1', date: 'Sat 26 Dec', route: 'London LHR → Tokyo NRT', who: 'Vini + Ana', note: 'BA (operated by JAL), 1 connection, 19h10. Ref XK24YM.', val: 'LHR 12:55 → NRT 17:05 +1 (Sun 27)' },
+  { id: 'f1b', date: '26/27 Dec', route: 'London → Tokyo', who: 'Dudu + Carol · Mat + Zuzu · Besne', note: 'Fill in each couple\'s flight and arrival time.', val: '' },
+  { id: 'f2', date: 'Fri 1 Jan',  route: 'Tokyo HND → Sapporo CTS', who: 'Vini + Ana', note: 'JAL519, First, seats 2H/2K.', val: 'HND 14:30 → CTS 16:05' },
+  { id: 'f3', date: 'Tue 5 Jan',  route: 'Sapporo CTS → Fukuoka FUK', who: 'Vini + Ana', note: 'JAL3512, Class J, seats not yet assigned.', val: 'CTS 13:50 → FUK 16:30' },
+  { id: 'f3b', date: 'Tue 5 Jan', route: '→ Fukuoka FUK', who: 'Dudu + Carol · Mat + Zuzu · Besne', note: 'Fill in: everyone meets at the Ritz-Carlton from ~17:00.', val: '' },
+  { id: 'f4', date: 'Fri 8 Jan',  route: 'Fukuoka FUK → Tokyo HND', who: 'All 7', note: 'Not booked yet. ANA/JAL/Skymark, ~1h45, lots of frequency. Aim late morning.', val: '' },
+  { id: 'f5', date: 'Sun 10 Jan', route: 'Tokyo HND → London LHR', who: 'Vini + Ana', note: 'BA direct, 15h05. Leave Janu by 10:00.', val: 'HND 13:15 → LHR 19:20' },
+];
+
+// who: all | sushi | others | opt     cat: food bars explore shop transport ski relax stay
+// status default: booked | tobook | plan
+const DAYS = [
+  { id: 'day1', n: 1, date: 'Sun 27 Dec', title: 'Arrival', city: 'tokyo', stay: 0,
+    meta: ['4 to 11°C', 'Sunset 16:35'],
+    items: [
+      { id: '1a', time: '17:05', cat: 'transport', who: 'couple', status: 'booked', title: 'Land at Narita', desc: 'BA / JAL from Heathrow (dep Sat 26 Dec 12:55, 1 connection, 19h10). Ref XK24YM. Immigration + bags: allow 45 to 60 min. Other couples: add your own arrival in the Overview flights table.', map: 'Narita Airport Terminal 2' },
+      { id: '1b', time: '18:00', cat: 'transport', who: 'all', status: 'tobook', price: '¥30k taxi', title: 'Narita → 1 Hotel Tokyo', desc: '70 to 90 min by car. Pre-book a van or 2 taxis via the hotel, or Narita Express to Tokyo Station (55 min) + 10 min taxi. Expect to be at the hotel ~19:30 to 20:00.', map: '1 Hotel Tokyo Akasaka Trust Tower' },
+      { id: '1c', time: '19:45', cat: 'stay', who: 'all', status: 'booked', title: '1 Hotel Tokyo', desc: 'Akasaka Trust Tower, floors 38 to 43 (opened Mar 2026). Lobby Bar is gin-led, good first drink. Akasaka / Tameike-sanno stations.', map: '1 Hotel Tokyo Akasaka Trust Tower' },
+      { id: '1d', time: '20:30', cat: 'food', who: 'all', status: 'plan', price: '¥5-8k', title: 'Dinner in the building', desc: 'Tokyo World Gate Akasaka (same complex, zero effort after 19h of travel): Kyobashi Isehiro (yakitori, takes groups), Akasaka Yonegin (Japanese), Tamasuke (Hakata udon / teppan). Or the hotel\'s Mediterranean restaurant if nobody can move.', alts: 'Hotel concierge can hold a table for 7 for ~20:30 once everyone\'s arrival times are in.', map: 'Tokyo World Gate Akasaka' },
+      { id: '1e', time: '22:00', cat: 'relax', who: 'all', status: 'plan', title: 'Early night', desc: 'Golden Gai is on the 29th after Oniku Karyu, when everyone has legs. Lobby Bar at the hotel if anyone is still standing.', map: '' },
+    ]},
+
+  { id: 'day2', n: 2, date: 'Mon 28 Dec', title: 'Ema at Meiji Jingu, then the catwalk', city: 'tokyo', stay: 0,
+    meta: ['4 to 11°C', 'Sunset 16:35', 'Narisawa + Miura closed Mon'],
+    items: [
+      { id: '2a', time: '07:30', cat: 'explore', who: 'all', status: 'plan', hl: true, title: 'Meiji Jingu: the plaques', jp: '明治神宮 絵馬', desc: 'Gates open ~06:40. Enter via the Harajuku south approach. Buy ema at the amulet counter next to the main sanctuary, write at the standing desks, hang them around the camphor trees. Quiet before 08:30.', warn: 'This is THE day. From 31 Dec night to 3 Jan it is hatsumode: 3m+ people, hours of queues. Not possible later in the trip.', map: 'Meiji Jingu Main Shrine' },
+      { id: '2b', time: '09:15', cat: 'food', who: 'all', status: 'plan', price: '¥', title: 'Breakfast, Omotesando', desc: 'Koffee Mameya (the original, Omotesando backstreet) for coffee, Bread, Espresso & for breakfast. Or the hotel first and start at 09:30.', map: 'Koffee Mameya Omotesando' },
+      { id: '2c', time: '10:30', cat: 'shop', who: 'all', status: 'plan', hl: true, title: 'The catwalk: Omotesando → Cat Street → Minami-Aoyama', desc: 'Omotesando Hills, Gyre, then Cat Street (Beams Harajuku, Human Made Harajuku flagship if open), then the Minami-Aoyama backstreets: Sacai, Prada, Comme des Garçons, Issey Miyake.', alts: '<b>Last proper shopping days are 29 and 30 Dec.</b> Independents shut 31 Dec to 2 Jan, sales start 2 Jan.', map: 'Omotesando Hills' },
+      { id: '2d', time: '13:30', cat: 'food', who: 'all', status: 'tobook', price: '¥¥', title: 'Lunch: Ivy Place, Daikanyama', desc: 'Inside T-Site, big tables, takes 7 without drama. Book on TableCheck.', map: 'Ivy Place Daikanyama', book: 'https://www.tablecheck.com/en/shops/ivyplace/reserve' },
+      { id: '2e', time: '15:00', cat: 'shop', who: 'all', status: 'plan', title: 'Daikanyama T-Site / Tsutaya Books', jp: '代官山 蔦屋書店', desc: 'Then the Sarugakucho junction: Okura (unmarked indigo shop), Hollywood Ranch Market, Bonjour Records for vinyl.', map: 'Daikanyama T-Site' },
+      { id: '2f', time: '16:30', cat: 'shop', who: 'opt', status: 'plan', title: 'Nakameguro + Ebisu', desc: 'Walk down to Nakameguro along the river: Visvim General Store + WMV (Aobadai 1-22-11, till 20:00). Then Ebisu for the Kapital shops. Kosugiyu Harajuku (Harakado B1, ¥600) if anyone wants a sento before dinner.', map: 'Visvim General Store Nakameguro' },
+      { id: '2g', time: '19:00', cat: 'food', who: 'sushi', status: 'tobook', price: '¥38k+', hl: true, title: 'Sushi crew: Takumi Tatsuhiro', jp: 'すし 匠 達広', desc: 'Shinjuku Gyoen. Omakase from ¥38,400. Counter + 1 private room at the back. Last seating 20:00, 120 min. Closed Sun, so Mon is the slot.', warn: 'Book via Japan Food Guide or 03-5925-8225, 3 to 4 weeks ahead minimum. Ask how many fit at one sitting.', map: 'Sushi Takumi Tatsuhiro Shinjuku Gyoen', book: 'https://japan-food.guide/en/restaurants/943' },
+      { id: '2h', time: '19:30', cat: 'food', who: 'others', status: 'tobook', price: '¥8-12k', title: 'Everyone else: Hibi Harebare', jp: '酒ト鮨 日々晴々 新宿三丁目', desc: 'Sushi izakaya 5 min from Takumi: toro-taku, uni pudding, deep sake list. Mostly counter, so ask for adjacent seats or a table when booking.', warn: 'AutoReserve or 03-6457-8171.', alts: 'Alt: <b>Yakiniku Jumbo Shirokane</b> (private rooms, TableCheck) if the group wants meat instead.', map: '日々晴々 新宿三丁目', book: 'https://autoreserve.com/en/' },
+      { id: '2i', time: '22:00', cat: 'bars', who: 'all', status: 'plan', title: 'Regroup: The SG Club, Shibuya', desc: 'Guzzle (ground floor, casual, no cover) takes 7. Sip (basement speakeasy) for 3 to 4 if the mood is quieter. Open till 03:00.', map: 'The SG Club Shibuya' },
+    ]},
+
+  { id: 'day3', n: 3, date: 'Tue 29 Dec', title: 'Yanaka, knives, wagyu, Golden Gai', city: 'tokyo', stay: 0,
+    meta: ['4 to 11°C', 'Sunset 16:35', 'Shutdown starts: last safe day for Kappabashi'],
+    items: [
+      { id: '3a', time: '09:30', cat: 'explore', who: 'all', status: 'plan', hl: true, title: 'Yanaka walk (2.5 to 3h)', jp: '谷根千', desc: 'Nippori west exit → Yuyake Dandan steps → Yanaka Ginza → Hebi-michi lane → Kayaba Coffee (1916 kissaten) → SCAI the Bathhouse (gallery in an old sento, 12:00 to 18:00, check show dates) → Yanaka cemetery → HAGISO → Nezu Shrine torii tunnel → Nezu station.', alts: 'Private guide option: <b>Tanaka\'s Tokyo Tours</b>, 3.5h, ¥30,000 per 4 pax, ask for 7 or 2 guides.', map: 'Yuyake Dandan Yanaka', book: 'https://www.tanaka-tokyotours.com/tours/yanaka-walking-tour/' },
+      { id: '3b', time: '12:30', cat: 'food', who: 'all', status: 'plan', price: '¥', title: 'Lunch: Ueno Sakuragi Atari', desc: 'Three renovated 1938 houses: beer hall, bakery, small plates. Or Kayaba Coffee if you are still there.', map: 'Ueno Sakuragi Atari' },
+      { id: '3c', time: '14:00', cat: 'shop', who: 'all', status: 'plan', hl: true, title: 'Kappabashi', jp: 'かっぱ橋道具街', desc: 'Kama-Asa (釜浅商店, knives, pans, 11:00 to 17:30) then Tsubaya (つば屋包丁店, 9:00 to 18:00). 10 min taxi from Nezu. Kama-Asa engraves and ships.', warn: 'The whole street shuts roughly 30 Dec to 4/5 Jan. Today is the last safe day.', map: 'Kama-Asa Kappabashi' },
+      { id: '3d', time: '17:00', cat: 'relax', who: 'all', status: 'plan', title: 'Back to Akasaka, reset', desc: 'Shower, nap. Ginza is 10 min from the hotel.', map: '' },
+      { id: '3e', time: '19:00', cat: 'food', who: 'all', status: 'tobook', price: '¥33-38k', hl: true, title: 'Oniku Karyu', jp: 'おにく 花柳', desc: 'Ginza (VORT Ginza briller 7F, 1-14-6), not Roppongi any more. 1 Michelin star wagyu kaiseki on the teppan, chef Haruka Katayanagi. Private room for 4 to 8, so all 7 at one table. + 10% service.', warn: 'Foreigners are asked to book via omakase.in, byfood or hotel concierge. Request the 4-8 room in early Nov. Closed Sun.', map: 'Oniku Karyu Ginza', book: 'https://www.byfood.com/restaurant/karyu-218' },
+      { id: '3f', time: '22:00', cat: 'bars', who: 'all', status: 'plan', hl: true, title: 'Golden Gai, the real night', jp: '新宿ゴールデン街', desc: 'Ginza → Shinjuku 20 min taxi. Albatross G (3 floors, chandeliers, ¥500 cover, takes groups) → Deathmatch in Hell (no cover, ¥666 drinks, metal) → The Open Book (standing, lemon sours) → Ken\'s Bar or Bar Araku (¥600, English-speaking owners).', warn: 'Many Golden Gai bars close 31 Dec to 3 Jan. This is the night. Bars open 20:00 to 21:00.', map: 'Albatross G Golden Gai' },
+    ]},
+
+  { id: 'day4', n: 4, date: 'Wed 30 Dec', title: 'Coffee, books, tsukemen, Narisawa', city: 'tokyo', stay: 0,
+    meta: ['4 to 11°C', 'Sunset 16:35', 'Last full day before NY shutdown'],
+    items: [
+      { id: '4a', time: '10:30', cat: 'food', who: 'all', status: 'plan', price: '¥', hl: true, title: 'Kiyosumi-Shirakawa coffee', jp: '清澄白河', desc: 'Koffee Mameya Kakeru (11:00 to 18:00, tasting course at the counter, cups walk-in) → Arise Coffee Roasters (tiny, owner hand-pours) → Blue Bottle Kiyosumi (Japan\'s first, 2015 warehouse). 20 min taxi from Akasaka.', alts: 'Allpress roastery has closed and moved to Nagano. <b>MOT</b> (Museum of Contemporary Art) usually shuts ~28 Dec to 1 Jan, check mot-art-museum.jp.', map: 'Koffee Mameya Kakeru', book: 'https://www.tablecheck.com/en/shops/koffee-mameya-kakeru/reserve' },
+      { id: '4b', time: '12:30', cat: 'food', who: 'all', status: 'plan', price: '¥', title: 'Lunch: Fukagawa-meshi', desc: 'Clam rice around Fukagawa Fudo / Tomioka Hachiman, 10 min walk. Or Fukadaso Cafe (1960s apartment conversion) if you want to stay in the coffee zone.', map: 'Fukagawa Kamasho' },
+      { id: '4c', time: '14:00', cat: 'shop', who: 'all', status: 'plan', hl: true, title: 'Jimbocho books', jp: '神保町古書店街', desc: 'Kitazawa Bookstore (2F, green door, English rare and academic, 12:00 to 17:00) → Komiyama Shoten (photo and art books, Araki) → Isseido (antiquarian, 1903) → Bohemian\'s Guild (art, design, first editions). 15 min taxi from Kiyosumi.', warn: 'Secondhand shops typically close 29/30 Dec to 4/5 Jan. Confirm Kitazawa is open on the 30th. Backup slot: Sat 9 Jan (Kitazawa opens Sat).', map: 'Kitazawa Bookstore Jimbocho' },
+      { id: '4d', time: '15:30', cat: 'food', who: 'all', status: 'plan', price: '¥', title: 'Rokurinsha tsukemen', jp: '六厘舎 東京駅', desc: 'Tokyo Ramen Street, Tokyo Station Ichibangai B1 (Yaesu south). 14:30 to 16:30 is the dead zone, 11:30 to 13:30 and 18:00 to 20:00 are 45 min+ queues. Ticket machine, 26 seats so 7 gets split. 10 min taxi from Jimbocho.', alts: 'Early-bird version: <b>asa-tsuke</b> morning menu 07:30 to 09:45. New sister shop <b>Sanrinsha</b> in Yaesu if the queue is silly.', map: 'Rokurinsha Tokyo Ramen Street' },
+      { id: '4e', time: '19:30', cat: 'food', who: 'all', status: 'tobook', price: '¥78k', hl: true, title: 'NARISAWA', desc: 'Minami-Aoyama. The fancy night. 15 seats, tables only, so 7 = 2 tables. Chef\'s tasting ¥78,200 incl. tax and service, plus drinks. No stated dress code, no strong perfume.', warn: 'December seats release 1 Nov at 10:00 JST on omakase.in: 1 booking per account per month, so use 2 to 3 accounts, or Pocket Concierge / hotel concierge. Closed Sun/Mon. Confirm they serve on 30 Dec (last service before NY). Cancellation 50% at 5 days, 100% at 2.', map: 'NARISAWA Minami-Aoyama', book: 'https://omakase.in/en/r/ne143874' },
+      { id: '4f', time: '22:30', cat: 'bars', who: 'opt', status: 'plan', title: 'Nightcap', desc: 'Two Rooms rooftop terrace (Aoyama, 5 min from Narisawa) or the Lobby Bar back at 1 Hotel.', map: 'Two Rooms Grill Bar Aoyama' },
+    ]},
+
+  { id: 'day5', n: 5, date: 'Thu 31 Dec', title: 'New Year\'s Eve', city: 'tokyo', stay: 0,
+    meta: ['4 to 11°C', 'Sunset 16:35', 'Independents shut tonight; hotels, Azabudai Hills, Tokyo Station open'],
+    items: [
+      { id: '5a', time: '', cat: 'relax', who: 'all', status: 'plan', title: 'Slow morning', desc: 'Sleep. Get cash out at a konbini ATM (banks shut 31 Dec to 3 Jan). Pack ski bags for the 07:00 wake-up tomorrow.', map: '' },
+      { id: '5b', time: '12:30', cat: 'food', who: 'all', status: 'plan', price: '¥', title: 'Lunch: Tonkatsu Suzuki, Tokyo Station', jp: 'とんかつ 鈴木', desc: 'Kitchen Street B1 (Yaesu north exit, not Gransta). Echigo mochibuta pork, free rice and cabbage refills. 11:00 to 23:00, walk-in only, counter seats. Station complexes trade through NY.', alts: 'Or Azabudai Hills Market: Yamayuki tuna counter, Azabudai Torishiki takeaway yakitori, Kameido Gyoza.', map: 'Tonkatsu Suzuki Tokyo Station Kitchen Street' },
+      { id: '5c', time: '15:00', cat: 'relax', who: 'opt', status: 'plan', price: '¥', title: 'Sento: Koganeyu', jp: '黄金湯', desc: 'Kinshicho. Jo Nagasaka renovation, proper sauna, DJ booth at the bandai, house craft beer. ~¥550 + sauna. Or the new Koganeyu Shinjuku (opened Jul 2026, 12:30 to 09:30).', warn: 'Tattoo policy: check before going. Thermae-Yu (Kabukicho) is the tattoo-friendly fallback with cover seals.', map: 'Koganeyu Kinshicho' },
+      { id: '5d', time: '19:30', cat: 'food', who: 'all', status: 'tobook', price: '¥¥¥', hl: true, title: 'NYE dinner', desc: 'Plan A: Soho House Tokyo (Omotesando Grid Tower, 13-14F, rooftop pool terrace with Tokyo Tower view, opened Apr 2026). NYE programme lands in the app around late Nov. Plan B: 1 Hotel Tokyo NYE dinner (hotels run 31 Dec to 3 Jan). Plan C: Omotesando Ukai-tei teppanyaki, private rooms with own chef and griddle (check their year-end calendar, 03-5467-5252).', warn: 'Soho House: a member signs in max 3 guests. 7 of us = 2 members present, or a ticketed members\' event. Sort this when the programme drops.', map: 'Soho House Tokyo Omotesando', book: 'https://www.sohohouse.com/houses/soho-house-tokyo' },
+      { id: '5e', time: '23:00', cat: 'bars', who: 'all', status: 'plan', hl: true, title: 'Countdown', desc: 'Option 1: stay at Soho House (DJ, rooftop). Option 2: Zojoji, 108 bell strikes at midnight with Tokyo Tower lit behind, 15 min taxi from Akasaka, crowds from 22:00, aim for the main gate. Option 3: Gold Bar at the EDITION Toranomon (reserve).', warn: 'Shibuya countdown is cancelled again: Hachiko fenced off, street drinking banned, not an event. Be in bed by 01:30: Sapporo flight tomorrow.', map: 'Zojoji Temple' },
+    ]},
+
+  { id: 'day6', n: 6, date: 'Fri 1 Jan', title: 'Tokyo → Niseko (just us 2)', city: 'niseko', stay: 1,
+    meta: ['-9 to -2°C', 'Sunset 16:10', 'Japan\'s 1 to 3 Jan holiday: hotel restaurants only'],
+    items: [
+      { id: '6a', time: '12:00', cat: 'transport', who: 'couple', status: 'plan', title: 'Akasaka → Haneda T1', desc: 'JAL domestic = Terminal 1. 30 min taxi, leave the hotel by 12:00 for a 14:30 flight with ski bags. The other 5 go their own way from here until Fukuoka.', map: 'Haneda Airport Terminal 1' },
+      { id: '6b', time: '14:30', cat: 'transport', who: 'couple', status: 'booked', title: 'JAL519 HND → New Chitose', desc: 'Arrives 16:05. First Class, seats 2H / 2K.', map: 'New Chitose Airport' },
+      { id: '6c', time: '16:30', cat: 'transport', who: 'couple', status: 'tobook', price: '¥50k', title: 'CTS → Shiguchi private transfer', desc: '2.5 to 3h in January snow, so arrival ~19:00 to 19:30. One Alphard via Shiguchi (3 pax + ski bags, ¥50,000 one way). Book through Shiguchi for both directions.', warn: 'Shared coaches (Resort Liner) take 3.5h and drop in Hirafu, not Hanazono. Private only.', map: 'New Chitose Airport' },
+      { id: '6d', time: '19:15', cat: 'stay', who: 'couple', status: 'booked', title: 'Shiguchi', desc: '78-5 Hanazono, Kutchan. 5 kominka villas by Shouya Grigg (Zaborin founder), each with its own natural onsen bath. Multi-course breakfast included. Hanazono lifts 5 to 8 min by car, Hirafu 15 min.', warn: 'Tell Shiguchi the arrival is ~19:00 (their last check-in is 18:30 if dining). Ask for a daily lift drop / pick-up.', map: 'Shiguchi Hanazono Kutchan' },
+      { id: '6e', time: '20:00', cat: 'food', who: 'couple', status: 'tobook', price: '¥15-25k', title: 'Late arrival dinner: Park Hyatt Hanazono', desc: '5 min from Shiguchi, open on 1 Jan. China Kitchen (17:00 to 22:00), Teppan, or The Lounge semi-buffet if it is late. Book via the hotel dining line.', alts: 'If the transfer is quick, Somoza\'s 19:00 / 19:30 seating is a stretch but possible: ask Shiguchi. Otherwise Somoza is tomorrow.', map: 'Park Hyatt Niseko Hanazono' },
+      { id: '6f', time: '', cat: 'ski', who: 'couple', status: 'tobook', price: '¥27k passes', title: 'Gear + lift passes', desc: 'Rhythm Japan or Niseko Sports deliver rentals to accommodation: confirm Shiguchi address and an evening fitting on arrival. Niseko United All Mountain 4-day pass ¥52,500 pp (peak), pre-order online, consecutive days. Hanazono 308 also rents on-site.', map: 'Rhythm Japan Niseko', book: 'https://rhythmjapan.com' },
+    ]},
+
+  { id: 'day7', n: 7, date: 'Sat 2 Jan', title: 'Ski. Somoza.', city: 'niseko', stay: 1,
+    meta: ['-9 to -2°C', 'Lifts 08:30 to 16:30', 'Night ski Hanazono 16:00 to 20:00'],
+    items: [
+      { id: '7a', time: '08:30', cat: 'ski', who: 'couple', status: 'plan', title: 'Hanazono all day', desc: 'Lunch at Hanazono EDGE (600 seats, boots OK, no booking) or Café 308 for coffee. Kagami-biraki and mochi pounding at the base on 1 Jan are missed, but Saturday fireworks are at 19:00.', map: 'Hanazono 308 Niseko' },
+      { id: '7b', time: '', cat: 'ski', who: 'opt', status: 'tobook', price: '¥130k', title: 'Private guide / backcountry', desc: 'Hanazono Powder Guides: ¥130,000 for up to 4 pax, 6h, pick-up included, bookings@harmonyresorts.com. NAC is the alternative. Pick the day with the best forecast.', map: 'Hanazono 308 Niseko', book: 'https://hanazononiseko.com/en/winter/activities/backcountry-guiding' },
+      { id: '7c', time: '18:00', cat: 'food', who: 'couple', status: 'tobook', price: '¥38.5k', hl: true, title: 'Somoza', jp: '杣', desc: 'The 150-yr kominka next to Shiguchi: gallery tour 18:00, dinner 18:30, ~2.5h. Chef\'s course ¥38,500 (French technique, Hokkaido produce). Thu to Sun only, 30-day window on TableCheck, Shiguchi guests get priority.', warn: 'Lock it through Shiguchi now. No vegan / dairy-free. Fireworks at 19:00 are visible from Hanazono base only, so it is Somoza or fireworks.', map: 'Somoza Niseko', book: 'https://somoza.jp/en/' },
+    ]},
+
+  { id: 'day8', n: 8, date: 'Sun 3 Jan', title: 'Ski. Onsen. Sushi Shin.', city: 'niseko', stay: 1,
+    meta: ['-9 to -2°C', 'Lifts 08:30 to 16:30'],
+    items: [
+      { id: '8a', time: '08:30', cat: 'ski', who: 'couple', status: 'plan', title: 'Grand Hirafu side', desc: 'Lunch at King Bell Hut (near the King gondola top, 10:00 to 15:30) or Boyoso soup curry (mid-mountain, cash, tiny: go 11:15 or after 13:30).', map: 'King Bell Hut Niseko' },
+      { id: '8b', time: '16:30', cat: 'relax', who: 'couple', status: 'plan', price: '¥1.2k', title: 'Onsen: Hirafutei', desc: 'Central Hirafu, 15:00 to 23:00, outdoor bath + sauna, tattoos allowed. Or Yugokorotei (Moiwa, 20 min, forest rotenburo, ¥1,000, tattoos covered). The villa has its own onsen, so this is the one public soak.', map: 'Hirafutei Onsen Niseko' },
+      { id: '8c', time: '19:30', cat: 'food', who: 'couple', status: 'tobook', price: '¥57k', hl: true, title: 'Sushi Shin by Miyakawa', desc: 'Sansui Niseko, Hirafu. Omakase, holiday pricing ¥57,000 pp for 19 Dec to 5 Jan. Main counter max 10.', warn: 'TableCheck. Cancellation 7d 30%, 3d 50%, 2d 100%.', alts: 'Alt: <b>Mame</b> (Shu kaiseki, 22 seats, ~¥30k) or <b>Kumo</b> at Skye (Hokkaido tasting).', map: 'Sushi Shin Niseko', book: 'https://www.tablecheck.com/en/shops/sushi-shin/reserve' },
+      { id: '8d', time: '22:00', cat: 'bars', who: 'opt', status: 'plan', title: 'Toshiro\'s Bar / Bar Gyu+', desc: 'Toshiro\'s is in the same building as Sushi Shin: classic Japanese bartending. Bar Gyu+ (the fridge door) is tiny but easy for 2.', map: 'Bar Gyu+ Niseko' },
+    ]},
+
+  { id: 'day9', n: 9, date: 'Mon 4 Jan', title: 'Last ski day. Bang Bang.', city: 'niseko', stay: 1,
+    meta: ['-9 to -2°C', 'Lifts 08:30 to 16:30', 'Somoza closed Mon'],
+    items: [
+      { id: '9a', time: '08:30', cat: 'ski', who: 'couple', status: 'plan', title: 'Last day on the hill', desc: 'Whichever side had the snow. Night skiing at Hanazono till 20:00 for the keen.', map: 'Hanazono 308 Niseko' },
+      { id: '9b', time: '19:00', cat: 'food', who: 'couple', status: 'tobook', price: '¥6-9k', hl: true, title: 'Bang Bang', jp: 'ばんばん', desc: 'Hirafu yakitori izakaya, the local institution. Online booking, 90-day rolling window (open now for 4 Jan), card hold ¥5,000 pp, 2h table limit.', alts: 'Alt: <b>The Barn by Odin</b> (French alpine bistro) or <b>Mūsu</b> (fireplace sofas, cocktails, Odin Place).', map: 'Bang Bang Niseko', book: 'https://www.tablecheck.com/en/shops/nisekobangbang/reserve' },
+      { id: '9c', time: '21:30', cat: 'relax', who: 'couple', status: 'plan', title: 'Pack', desc: 'Rental pick-up arranged for 09:00. Transfer leaves 09:30 for the 13:50 flight.', map: '' },
+    ]},
+
+  { id: 'day10', n: 10, date: 'Tue 5 Jan', title: 'Niseko → Fukuoka. Yatai.', city: 'fukuoka', stay: 2,
+    meta: ['3 to 10°C', 'Sunset 17:25', 'Hachibei Tenjin + B·B·B Potters closed Tue'],
+    items: [
+      { id: '10a', time: '09:30', cat: 'transport', who: 'couple', status: 'tobook', title: 'Shiguchi → CTS', desc: '2.5 to 3h, Alphard via Shiguchi. At the airport by 12:30.', map: 'New Chitose Airport' },
+      { id: '10b', time: '13:50', cat: 'transport', who: 'couple', status: 'booked', title: 'JAL3512 CTS → Fukuoka', desc: 'Arrives 16:30. Class J, pick seats when the window opens.', map: 'Fukuoka Airport' },
+      { id: '10c', time: '16:45', cat: 'transport', who: 'all', status: 'plan', title: 'FUK → Ritz-Carlton', desc: 'Subway Kūkō line to Tenjin is 11 min + 7 min walk. With ski bags: taxi via the hotel, 20 to 30 min. Everyone else lands and meets at the hotel.', map: 'The Ritz-Carlton Fukuoka' },
+      { id: '10d', time: '17:15', cat: 'stay', who: 'all', status: 'booked', title: 'The Ritz-Carlton Fukuoka: the 7 reunite', desc: 'Daimyo 2-6-50, floors 18 to 24. ESPA spa + pool on 24F. Daimyo backstreets on the doorstep, Tenjin 5 min, Yakuin 15 min, Ohori Park 15 min.', map: 'The Ritz-Carlton Fukuoka' },
+      { id: '10e', time: '19:00', cat: 'food', who: 'all', status: 'plan', price: '¥2-3k/stall', hl: true, title: 'Yatai crawl, Tenjin', jp: '屋台', desc: 'Start at Chez Rémy (レミさんち): French-run yatai on the pavement in front of Tenjin Loft, Watanabe-dori. Escargot ¥900, quiche, mussels, bouillabaisse ramen, wine by the glass. Tue to Sat 18:30 to 24:00, cash. Then Manryu (mentai tamagoyaki), Nakachan, Hitotsu Yane no Shita.', warn: 'Each stall is 8 to 10 stools: split 3 + 4 and rotate. Stalls close in rain or strong wind. Yatai Kippu (¥1,100, drink + dish) covers 16 stalls incl. Chez Rémy.', map: 'Chez Remy yatai Watanabe-dori Fukuoka' },
+      { id: '10f', time: '22:00', cat: 'bars', who: 'opt', status: 'plan', title: 'Bar Oscar', desc: 'Daimyo 1-10-29, 6F, 3 min from the hotel. Shuichi Nagatomo, seasonal fruit cocktails, Asia\'s 50 Best Bars Discovery. ~20 seats: go early or split. Closed Sun.', alts: 'Alt: <b>Backstage</b> (Daimyo, 11F, jazz bar since 1974, wall of vinyl, closed Sun).', map: 'Bar Oscar Daimyo Fukuoka' },
+    ]},
+
+  { id: 'day11', n: 11, date: 'Wed 6 Jan', title: 'Itoshima coast, oysters, Goh', city: 'fukuoka', stay: 2,
+    meta: ['3 to 10°C', 'Sunset 17:25 at Futamigaura', 'Motsunabe Yamanaka + Current closed Wed'],
+    items: [
+      { id: '11a', time: '09:30', cat: 'transport', who: 'all', status: 'tobook', price: '~¥60k', title: 'Van for the day', desc: 'Jumbo taxi / 9-seater via the hotel, ~8h. Itoshima is 40 to 50 min west on the Fukuoka-Maebaru road.', map: 'Itoshima' },
+      { id: '11b', time: '10:30', cat: 'explore', who: 'all', status: 'plan', hl: true, title: 'Keya cape + Mt Tateishi walk', jp: '芥屋の大門 / 立石山', desc: 'Park at Keya. 30 min up Mt Tateishi for the full Genkai coast panorama, then the cape path to see Keya no Ōto basalt cave from above (boats don\'t run in Jan). 1.5 to 2h, easy shoes fine, wind layer needed.', map: 'Keya no Oto Itoshima' },
+      { id: '11c', time: '13:00', cat: 'food', who: 'all', status: 'plan', price: '¥3-4k', hl: true, title: 'Oyster huts, Kishi', jp: '岐志漁港 牡蠣小屋', desc: 'Kaki-goya: grill them yourself at the table, ~¥1,000/kg, January is peak. 7 fit at one hut table. 10:00 to 17:00. Bring a jacket you don\'t mind smelling of oysters.', map: 'Kishi fishing port oyster huts Itoshima' },
+      { id: '11d', time: '15:00', cat: 'food', who: 'all', status: 'plan', price: '¥', title: 'Coast cafe', desc: 'Beach Cafe Sunset (11:00 to 21:00, closed Thu) or London Bus Cafe (till sunset). Current bakery is closed Wed, skip.', map: 'Beach Cafe Sunset Itoshima' },
+      { id: '11e', time: '16:30', cat: 'explore', who: 'all', status: 'plan', hl: true, title: 'Sakurai Futamigaura torii at golden hour', jp: '桜井二見ヶ浦', desc: 'White torii in the sea + Meoto-iwa, faces west. Sunset 17:25. Leave by 17:30 sharp for Goh.', map: 'Sakurai Futamigaura' },
+      { id: '11f', time: '18:30', cat: 'food', who: 'all', status: 'tobook', price: '¥20-25k', hl: true, title: 'Goh (La Maison de la Nature Goh)', desc: '010 Building 3F, Sumiyoshi (by Canal City). Takeshi "Goh" Fukuyama, Asia\'s 50 Best 2025. One communal table d\'hôte (2 to 8 pax, so 7 together), single seating ~18:30. Closed Mon.', warn: 'TableCheck via 010bld.com or +81 92-281-0955. Book now.', alts: 'Alt / second night: <b>GohGan</b> on 1F (Fukuyama x Gaggan, French-Indian, loud and fun, two 6-pax rooms + main room, ~¥8-10k, Tue to Fri).', map: 'Goh 010 Building Sumiyoshi Fukuoka', book: 'https://010bld.com/en/goh-e/' },
+      { id: '11g', time: '22:00', cat: 'bars', who: 'opt', status: 'plan', title: 'BAR 010', desc: 'Same building, 2F. Michito Kaneko, ¥880 cover, 28 seats, turns DJ bar late.', map: 'BAR 010 Sumiyoshi Fukuoka' },
+    ]},
+
+  { id: 'day12', n: 12, date: 'Thu 7 Jan', title: 'Knives, backstreets, jazz kissa', city: 'fukuoka', stay: 2,
+    meta: ['3 to 10°C', 'Sunset 17:25'],
+    items: [
+      { id: '12a', time: '08:30', cat: 'explore', who: 'opt', status: 'plan', title: 'Nature option, half day: Nokonoshima', jp: '能古島', desc: 'Taxi 20 min to Meinohama port, 10 min ferry. January = narcissus fields on the sea slope, 195 m lookout, Noko udon. Park 09:00 to 17:30, ¥500. Back in town by 13:00.', alts: 'Full-day option instead of the shops: <b>Mt Hōman</b> (829 m) from Kamado Shrine, Dazaifu: 2 to 2.5h up stone steps, 1.5h down, possible ice near the top, proper shoes. Kengo Kuma Starbucks + umegae-mochi on the way back.', map: 'Nokonoshima Island Park' },
+      { id: '12b', time: '10:30', cat: 'shop', who: 'all', status: 'plan', hl: true, title: 'Knives: Ōba forge', jp: '大庭鍛冶工場', desc: 'Kiyokawa 3-9-21, 10 min taxi. Toshio Ōba, 3rd generation, hand-forges the Hakata-bōchō (triangular tip) in a Taisho-era workshop; also the only maker of sumo-ring hoes in Japan. Mon to Sat 09:00 to 17:00.', warn: 'Tiny: send 2 to 3 people max and call first, 092-531-5625. Everyone else: Toyokatsu (刃物の店 豊勝, Shintencho arcade, est. 1931, 10:00 to 19:00, 5 min from hotel) or Hakata Kikuhide (pro-chef shop, Tenyamachi).', map: '大庭鍛冶工場 清川 福岡' },
+      { id: '12c', time: '12:00', cat: 'shop', who: 'all', status: 'plan', title: 'Daimyo → Imaizumi → Yakuin', desc: 'Vintage on Daimyo 1-chome, Catfish Records, Keyaki-dori for interiors. B·B·B Potters (Yakuin: Koishiwara and Onta ceramics, cafe upstairs). Unagi no Nedoko at ACROS (Kurume kasuri monpe) + Takumi Gallery (Hakata-ori, dolls).', map: 'B・B・B POTTERS 薬院' },
+      { id: '12d', time: '13:30', cat: 'food', who: 'all', status: 'plan', price: '¥', title: 'Lunch: Shin-Shin Tenjin or Yamanaka', desc: 'Shin-Shin (lighter tonkotsu, 20 to 40 min queue, closed Wed so Thu works). Or Yamanaka Honten sushi-kappo lunch in a zashiki room, 7 together, from ~¥7,000, 092-731-7771.', map: 'Hakata Ramen Shin-Shin Tenjin' },
+      { id: '12e', time: '15:30', cat: 'food', who: 'all', status: 'plan', price: '¥', hl: true, title: 'Listening by day: Jab', jp: 'ジャズ喫茶 ジャブ', desc: 'Watanabe-dori 5-2-13, 10 min walk. Jazz kissa since 1969, JBLs, swing-heavy vinyl, coffee ¥400 to 800, no cover, no phones, smoking allowed. 12:00 to 24:00, closed Sun. ~20 seats, a quiet room: go in 2 waves.', alts: 'Coffee first: <b>Stereo Coffee</b> (converted house, big speakers, 10:00 to 21:00), <b>Manu Coffee Kujira</b>, <b>Rec Coffee</b>.', map: 'ジャズ喫茶 ジャブ 渡辺通 福岡' },
+      { id: '12f', time: '19:00', cat: 'food', who: 'all', status: 'tobook', price: '¥4-6k', title: 'Dinner: pick one', desc: 'Yakitori no Hachibei honten (Kego 1-4-27, 8 min walk, Hakata style with raw cabbage, 47 seats, 092-732-5379). Motsunabe Yamanaka Akasaka (the miso motsunabe benchmark, rooms fit 7, 092-553-6915). Hanamidori Nishinakasu mizutaki (8-seat private room, 092-737-9696).', warn: 'Book 2 to 3 days ahead by phone or via the Ritz concierge.', map: '焼とりの八兵衛 上人橋通り店' },
+      { id: '12g', time: '21:30', cat: 'bars', who: 'opt', status: 'plan', hl: true, title: 'Listening night', desc: 'Living Stereo (Yakuin, circular counter, JBL 4344 + McIntosh, record shop attached, ~15 seats) → Jazz Inn New Combo (live most nights, roomier, till 02:00). Whisky: Bar Leichhardt (3,000+ bottles, ¥600 cover).', map: 'LIVING STEREO 薬院 福岡' },
+    ]},
+
+  { id: 'day13', n: 13, date: 'Fri 8 Jan', title: 'Fukuoka → Tokyo. Janu. Florilège.', city: 'tokyo', stay: 3,
+    meta: ['3 to 10°C', 'Sunset 16:45'],
+    items: [
+      { id: '13a', time: '09:00', cat: 'food', who: 'opt', status: 'plan', price: '¥', title: 'Coffee before the airport', desc: 'Fuglen Fukuoka (Hakata East Terrace, 07:00 to 22:00) if leaving via Hakata; Rec Coffee Yakuin Ekimae otherwise.', map: 'Fuglen Fukuoka' },
+      { id: '13b', time: '11:30', cat: 'transport', who: 'all', status: 'tobook', title: 'FUK → HND', desc: '~1h45. Fill in flight. Subway from Tenjin to the airport is 11 min.', map: 'Fukuoka Airport' },
+      { id: '13c', time: '15:00', cat: 'stay', who: 'all', status: 'booked', title: 'Janu Tokyo', desc: 'Azabudai Hills. Downstairs in the Market (B1): Azabudai Torishiki takeaway yakitori, Yamayuki tuna counter, Sumidaya onigiri, Kameido Gyoza. Kamiyacho station.', map: 'Janu Tokyo Azabudai Hills' },
+      { id: '13d', time: '19:00', cat: 'food', who: 'all', status: 'tobook', price: '¥22k+', hl: true, title: 'Florilège', desc: 'Azabudai Hills Garden Plaza D 2F, 3 min from Janu. Hiroyasu Kawate, plant-forward tasting, ¥22,000 + service. One long counter, so 7 in a row is plausible. Closed Mon.', warn: 'TableCheck, fee charged at booking.', alts: 'Alt: <b>Sézanne</b> chef\'s table (Four Seasons Marunouchi, ~¥60k+).', map: 'Florilege Azabudai Hills', book: 'https://www.tablecheck.com/en/shops/florilege/reserve' },
+      { id: '13e', time: '22:00', cat: 'bars', who: 'opt', status: 'plan', title: 'Gold Bar, EDITION Toranomon', desc: 'Walkable from Janu. Lounge seating, smart casual, reserve Fri/Sat: +81 3-5422-1630.', map: 'Gold Bar Tokyo EDITION Toranomon' },
+    ]},
+
+  { id: 'day14', n: 14, date: 'Sat 9 Jan', title: 'Free day. Sushi Miura.', city: 'tokyo', stay: 3,
+    meta: ['3 to 10°C', 'Sunset 16:45', 'Winter sales on'],
+    items: [
+      { id: '14a', time: '07:30', cat: 'food', who: 'opt', status: 'plan', price: '¥', title: 'Early birds: Rokurinsha asa-tsuke', desc: 'Morning tsukemen 07:30 to 09:45 at Tokyo Station, if the 30th was missed. Or sleep.', map: 'Rokurinsha Tokyo Ramen Street' },
+      { id: '14b', time: '11:00', cat: 'shop', who: 'opt', status: 'plan', title: 'Pick your own', desc: 'Winter sales: Isetan Shinjuku, Dover Street Market Ginza, Ginza Six. Jimbocho backup (Kitazawa open Sat 12:00 to 17:00) if the 30th was shut. Koganeyu Shinjuku sento. Toyosu Market tuna auction (05:30 to 06:30 from the 2F windows) for the insane.', map: 'Dover Street Market Ginza' },
+      { id: '14c', time: '13:00', cat: 'food', who: 'opt', status: 'plan', price: '¥¥', title: 'Lunch', desc: 'Tonkatsu Suzuki (Tokyo Station) if skipped on the 31st, or Tempura Abe in Ginza (~¥10-15k lunch).', map: 'Tempura Abe Ginza' },
+      { id: '14d', time: '19:00', cat: 'food', who: 'sushi', status: 'tobook', price: '¥35k+', hl: true, title: 'Sushi crew: Sushi Miura', jp: '鮨 みうら', desc: 'Akasaka 6-19-46, 10 min taxi from Janu. 1 Michelin star (2026), chef Kenta Miura, 13 yrs at a 3-star Kyoto ryotei: warm kappo dishes, then nigiri. Dinner only, from ¥35,000. Closed Mon.', warn: 'Japan Food Guide (request confirmed within 48h) or concierge, 3 to 4 weeks ahead. +81 90-8894-0020.', map: 'Sushi Miura Akasaka', book: 'https://japan-food.guide/en/restaurants/1067' },
+      { id: '14e', time: '19:00', cat: 'food', who: 'others', status: 'tobook', price: '¥21.5k+', title: 'Everyone else: Yoroniku', jp: 'よろにく', desc: 'Minami-Aoyama B1. Wagyu yakiniku tasting ¥21,500 + service, private rooms.', warn: 'omakase.in: January seats release 1 Dec 10:00 JST. If it fails, Yakiniku Jumbo Shirokane or Ukai-tei.', map: 'Yoroniku Minami-Aoyama', book: 'https://omakase.in/en/r/xd706837' },
+      { id: '14f', time: '22:00', cat: 'bars', who: 'all', status: 'plan', title: 'Last night: Bar Bridge', desc: '10F over Shibuya Crossing, listening bar, from ¥1,000, open till 05:00. Or back to the SG Club.', map: 'Bar Bridge Shibuya' },
+    ]},
+
+  { id: 'day15', n: 15, date: 'Sun 10 Jan', title: 'Fly home', city: 'tokyo', stay: 3,
+    meta: ['3 to 10°C'],
+    items: [
+      { id: '15a', time: '09:00', cat: 'food', who: 'all', status: 'plan', price: '¥', title: 'Breakfast at Janu / Azabudai Hills Market', desc: 'Last onigiri from Sumidaya.', map: 'Azabudai Hills Market' },
+      { id: '15b', time: '10:00', cat: 'transport', who: 'couple', status: 'plan', title: 'Janu → Haneda T3', desc: '25 min. Others: add your own flights in the Overview table.', map: 'Haneda Airport Terminal 3' },
+      { id: '15c', time: '13:15', cat: 'transport', who: 'couple', status: 'booked', title: 'BA HND → London LHR', desc: 'Direct, 15h05, lands 19:20 same day.', map: 'Haneda Airport Terminal 3' },
+    ]},
+];
+
+const CHECKS = [
+  { id: 'c01', when: 'Now', text: 'Shiguchi: flag ~19:00 arrival on 1 Jan, lock Somoza for 2 Jan, book the Alphard transfer each way (1 and 5 Jan)', d: '+81 136-55-5235' },
+  { id: 'c02', when: 'Now', text: 'Flights still open: FUK→HND 8 Jan for all 7; collect everyone else\'s London→Tokyo and →Fukuoka flights', d: 'JAL519 and JAL3512 done; pick Class J seats on 3512' },
+  { id: 'c03', when: 'Now', text: 'Bang Bang 4 Jan (90-day window is open), Sushi Shin 3 Jan (TableCheck), Park Hyatt dinner 1 Jan', d: 'Niseko NY week sells out in Oct/Nov' },
+  { id: 'c04', when: 'Now', text: 'Goh 6 Jan, 7 pax at the table', d: '010bld.com → TableCheck, or +81 92-281-0955' },
+  { id: 'c05', when: 'Now', text: 'Lift passes x2 (4-day All Mountain, pre-order) + rental delivery to Shiguchi + guide if wanted', d: 'rhythmjapan.com / niseko.ne.jp' },
+  { id: 'c06', when: '1 Nov 10:00 JST', text: 'NARISAWA 30 Dec: December release on omakase.in, 7 pax across 2 to 3 accounts, or Pocket Concierge', d: 'Confirm they serve on 30 Dec' },
+  { id: 'c07', when: 'Early Nov', text: 'Oniku Karyu 29 Dec, private room 4 to 8', d: 'omakase.in / byfood / concierge' },
+  { id: 'c08', when: 'Early Nov', text: 'Takumi Tatsuhiro 28 Dec (sushi crew) + Hibi Harebare 28 Dec (rest) + Ivy Place lunch', d: 'japan-food.guide / AutoReserve / TableCheck' },
+  { id: 'c09', when: 'Early Nov', text: 'Day-1 table for 7 near the hotel (~20:30), Florilège 8 Jan, Fukuoka van 6 Jan via Ritz concierge', d: '' },
+  { id: 'c10', when: 'Late Nov', text: 'Soho House Tokyo NYE programme: decide Plan A / B / C and book', d: 'Need 2 members or a ticketed event for 7. Backup: 1 Hotel NYE dinner, Ukai-tei' },
+  { id: 'c11', when: '1 Dec 10:00 JST', text: 'Yoroniku 9 Jan: January release on omakase.in. Sushi Miura 9 Jan request same week', d: '' },
+  { id: 'c12', when: 'Early Dec', text: 'Concierge to confirm NY closures: Kappabashi (Kama-Asa, Tsubaya), Kitazawa Bookstore, Koffee Mameya Kakeru, MOT, Golden Gai bars', d: 'Move Jimbocho to 9 Jan if the 30th is shut' },
+  { id: 'c13', when: 'Early Dec', text: 'Yanaka private guide 29 Dec (optional) + Tanaka\'s Tokyo Tours ask for 7', d: '' },
+  { id: 'c14', when: '2 to 3 Jan', text: 'Fukuoka phone/IG check: Ōba forge, Jab, Living Stereo, Chez Rémy reopening dates. Book Hachibei or Yamanaka for the 7th', d: 'Small independents can stay shut to 6/7 Jan' },
+  { id: 'c15', when: 'Before flying', text: 'Cash (yatai, kissa, Boyoso, oyster huts are cash), Suica on phones, ski bag allowances', d: '' },
+];
+
+/* =========================================================
+   STATE + SYNC
+   ========================================================= */
+const defaultPeople = { p1: 'Vinicius', p2: 'Ana', p3: 'Dudu', p4: 'Carol', p5: 'Mat', p6: 'Zuzu', p7: 'Besne' };
+let state = { fields: {}, statuses: {}, votes: {}, notes: {}, checks: {}, people: {} };
+let isRemote = false;
+let docRef = null;
+let me = localStorage.getItem('japan-ny-me') || '';
+
+const LOCAL_KEY = 'japan-ny-state';
+function loadLocal() { try { const s = JSON.parse(localStorage.getItem(LOCAL_KEY)); if (s) state = Object.assign(state, s); } catch(e) {} }
+function saveLocal() { try { localStorage.setItem(LOCAL_KEY, JSON.stringify(state)); } catch(e) {} }
+
+function setSync(status, text) {
+  const b = document.getElementById('sync-banner'), s = document.getElementById('sync-status');
+  b.classList.remove('offline', 'syncing', 'local');
+  if (status === 'synced') s.textContent = text || 'Synced: changes appear for everyone';
+  else if (status === 'syncing') { b.classList.add('syncing'); s.textContent = 'Syncing…'; }
+  else if (status === 'offline') { b.classList.add('offline'); s.textContent = text || 'Offline: changes saved on this device'; }
+  else { b.classList.add('local'); s.textContent = text || 'Local mode'; }
+}
+
+function setPath(path, value) {
+  // path like 'statuses.3e'
+  const [k, id] = path.split('.');
+  if (value === null) delete state[k][id]; else state[k][id] = value;
+  saveLocal();
+  if (docRef) {
+    setSync('syncing');
+    const upd = {}; upd[path] = value === null ? firebase.firestore.FieldValue.delete() : value;
+    docRef.update(upd).then(() => setSync('synced')).catch(() => setSync('offline'));
+  }
+}
+
+function initFirebase() {
+  if (typeof firebase === 'undefined') { setSync('local', 'Local mode (no sync library)'); return; }
+  try {
+    firebase.initializeApp({
+      apiKey: "AIzaSyCqtRQBPEmUwkQlD9KfQU36pZN1_pZnEO4",
+      authDomain: "japow-trip.firebaseapp.com",
+      projectId: "japow-trip",
+      storageBucket: "japow-trip.firebasestorage.app",
+      messagingSenderId: "1048408353213",
+      appId: "1:1048408353213:web:c98e170a8514a84e3d4ad4"
+    });
+    const db = firebase.firestore();
+    docRef = db.collection('trips').doc(TRIP_ID);
+    docRef.onSnapshot((doc) => {
+      if (doc.exists) {
+        const d = doc.data();
+        isRemote = true;
+        state = { fields: d.fields || {}, statuses: d.statuses || {}, votes: d.votes || {}, notes: d.notes || {}, checks: d.checks || {}, people: d.people || {} };
+        saveLocal();
+        setSync('synced');
+        renderCurrent(true);
+      } else {
+        docRef.set({ fields: {}, statuses: {}, votes: {}, notes: {}, checks: {}, people: {} }).catch(() => setSync('offline'));
+      }
+    }, (err) => { console.error(err); setSync('offline', 'Offline: saving on this device only'); });
+  } catch (e) { console.error(e); setSync('offline'); }
+}
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const mapsUrl = q => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
+const dirUrl = qs => 'https://www.google.com/maps/dir/' + qs.map(q => encodeURIComponent(q)).join('/');
+const people = () => Object.assign({}, defaultPeople, state.people || {});
+const personName = key => people()[key] || key;
+const initials = name => name.trim().split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+const field = (id, fallback) => (state.fields && state.fields[id] !== undefined) ? state.fields[id] : fallback;
+const statusOf = it => (state.statuses && state.statuses[it.id]) || it.status || 'plan';
+const STATUS_LABEL = { booked: 'Booked', tobook: 'To book', plan: 'Plan', skip: 'Skip' };
+const STATUS_NEXT = { plan: 'tobook', tobook: 'booked', booked: 'skip', skip: 'plan' };
+const WHO_LABEL = { all: 'All 7', sushi: 'Sushi crew', others: 'The rest', opt: 'Optional', couple: 'Vini + Ana' };
+const CAT_LABEL = { food: 'Food', bars: 'Bars', explore: 'Explore', shop: 'Shop', transport: 'Transport', ski: 'Ski', relax: 'Relax', stay: 'Stay' };
+const ICON = {
+  map: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-7 7-12a7 7 0 1 0-14 0c0 5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+  book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7"/><path d="M21 3l-9 9"/><path d="M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>',
+  route: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h6a4 4 0 0 0 0-8H10a4 4 0 0 1 0-8h6"/></svg>',
+  heart: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.5-9.3C1 8 3.5 4.5 7 4.5c2 0 3.5 1.2 5 3 1.5-1.8 3-3 5-3 3.5 0 6 3.5 4.5 7.2C19.5 16.4 12 21 12 21z"/></svg>',
+};
+
+function daysToGo() {
+  const now = new Date();
+  const msDay = 86400000;
+  const start = new Date('2026-12-27T00:00:00+09:00');
+  if (now < start) return { label: Math.ceil((start - now) / msDay) + ' days to go' };
+  if (now <= TRIP_END) {
+    const n = Math.floor((now - start) / msDay) + 1;
+    return { label: 'Day ' + n + ' of 15', day: n };
+  }
+  return { label: 'Done. Next one?' };
+}
+
+let currentTab = 'trip';
+let filterCat = 'all';
+let hideSkip = false;
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+function buildNav() {
+  const ul = $('#nav');
+  const dg = daysToGo();
+  let html = `<li><a href="#trip" data-tab="trip" class="meta"><small>Trip</small><b>Overview</b></a></li><li class="sep"></li>`;
+  let lastCity = '';
+  DAYS.forEach(d => {
+    if (lastCity && lastCity !== d.city) html += `<li class="sep"></li>`;
+    lastCity = d.city;
+    const [dow, num] = d.date.split(' ');
+    html += `<li><a href="#${d.id}" data-tab="${d.id}" class="${d.city}${dg.day === d.n ? ' today' : ''}"><small>${dow}</small><b>${num}</b></a></li>`;
+  });
+  html += `<li class="sep"></li><li><a href="#book" data-tab="book" class="meta"><small>Book</small><b>To do</b></a></li><li><a href="#guide" data-tab="guide" class="meta"><small>Ref</small><b>Guide</b></a></li>`;
+  ul.innerHTML = html;
+}
+
+function countStatuses(items) {
+  const c = { booked: 0, tobook: 0, plan: 0, skip: 0 };
+  items.forEach(it => c[statusOf(it)]++);
+  return c;
+}
+
+function renderOverview() {
+  const all = DAYS.flatMap(d => d.items);
+  const c = countStatuses(all);
+  const bookable = c.booked + c.tobook;
+  const pct = k => bookable ? Math.round(100 * c[k] / (bookable)) : 0;
+  const pp = people();
+  return `
+    <h2 class="sec">The trip</h2>
+    <div class="strip">
+      ${STAYS.map((s, i) => `<a class="block ${s.city}" href="${mapsUrl(s.map)}" target="_blank" rel="noopener" style="text-decoration:none"><span class="n">${s.nights}n</span><span class="city">${s.city}</span><span class="hotel">${esc(s.hotel)}</span><span class="dates">${s.dates}</span></a>`).join('')}
+    </div>
+
+    <h3 class="sec">Bookings</h3>
+    <div class="ref">
+      <div class="progress"><i class="b" style="width:${pct('booked')}%"></i><i class="t" style="width:${pct('tobook')}%"></i></div>
+      <div class="legend"><span class="lb">${c.booked} booked</span><span class="lt">${c.tobook} to book</span><span class="lp">${c.plan} plans / no booking needed</span><span class="ls">${all.filter(i => i.hl).length} highlights</span></div>
+      <p style="margin-top:0.6rem;font-size:0.8rem;color:var(--stone)">Tap any status badge on a day to cycle it. Full booking calendar under <a href="#book">To do</a>.</p>
+    </div>
+
+    <h3 class="sec">Flights</h3>
+    <table class="flights">
+      <thead><tr><th>Date</th><th>Route</th><th>Times</th></tr></thead>
+      <tbody>
+      ${FLIGHTS.map(f => `<tr><td style="white-space:nowrap">${f.date}</td><td>${esc(f.route)}<div style="font-size:0.72rem;color:var(--ink);font-weight:600">${esc(f.who)}</div><div style="font-size:0.75rem;color:var(--stone)">${esc(f.note)}</div></td><td><span class="editable" contenteditable="true" data-field="flight.${f.id}" data-placeholder="tap to add">${esc(field('flight.' + f.id, f.val))}</span></td></tr>`).join('')}
+      </tbody>
+    </table>
+
+    <h3 class="sec">Who is coming</h3>
+    <div class="people">
+      ${Object.keys(defaultPeople).map(k => `<div class="person${me === k ? ' me' : ''}"><span class="av">${initials(pp[k])}</span><span class="editable" contenteditable="true" data-person="${k}">${esc(pp[k])}</span></div>`).join('')}
+    </div>
+    <p style="font-size:0.78rem;color:var(--stone);margin-top:0.5rem">Tap a name to edit. Each person picks themselves once (top bar: "Who am I?") so ♥ votes carry initials.</p>
+
+    <h3 class="sec">Day by day</h3>
+    <div class="daygrid">
+      ${DAYS.map(d => { const cc = countStatuses(d.items); return `<a class="daycard ${d.city}" href="#${d.id}"><div class="d">${d.date}</div><div class="t">${esc(d.title)}</div><div class="k"><b>${cc.booked} booked</b> · <i>${cc.tobook} to book</i></div></a>`; }).join('')}
+    </div>
+
+    <h3 class="sec">How this trip works</h3>
+    <div class="ref">
+      <p><b>Who is where.</b> All 7 in Tokyo 27 to 31 Dec, Fukuoka 5 to 8 Jan and Tokyo 8 to 10 Jan. Niseko (1 to 5 Jan) is Vinicius + Ana only; the other 5 do their own thing and everyone meets at the Ritz-Carlton Fukuoka on the 5th.</p><p><b>Group logic.</b> Omakase counters seat 6 to 10, so sushi nights are for the sushi crew (yellow tag) while the rest (blue tag) get a dinner nearby, and everyone meets at the bar after. Big-table nights (Oniku Karyu, Narisawa, Goh, Florilège) are all 7.</p>
+      <p><b>New Year reality.</b> 29 Dec is when Japan starts shutting. 30 Dec is the last full day for independents (shops, bookshops, small bars). 31 Dec to 3 Jan: hotels, malls (Azabudai Hills, Tokyo Station) and chains trade, almost nothing independent does. Department stores reopen 2 Jan with fukubukuro and sales. The plan front-loads everything independent into 28 to 30 Dec.</p>
+      <p><b>Cash.</b> Yatai, kissa, Boyoso, oyster huts, several Golden Gai bars: cash only.</p>
+    </div>
+  `;
+}
+
+function renderDay(d) {
+  const stay = STAYS[d.stay];
+  const routeItems = d.items.filter(it => it.map && statusOf(it) !== 'skip' && it.cat !== 'stay').map(it => it.map);
+  const route = routeItems.length > 1 ? dirUrl(routeItems.slice(0, 10)) : (routeItems[0] ? mapsUrl(routeItems[0]) : '');
+  const cats = [...new Set(d.items.map(i => i.cat))];
+  return `
+    <div class="day-header">
+      <div class="day-number">${d.n}</div>
+      <div class="day-info">
+        <div class="day-date">${d.date}</div>
+        <div class="day-subtitle editable" contenteditable="true" data-field="daytitle.${d.id}">${esc(field('daytitle.' + d.id, d.title))}</div>
+        <div class="day-meta">${(d.meta || []).map(m => `<span>${esc(m)}</span>`).join('')}</div>
+      </div>
+      <span class="city-badge ${d.city}">${d.city}</span>
+    </div>
+
+    <div class="stay-box">
+      <span>🏠</span><div><b>${esc(stay.hotel)}</b> <span class="muted">· ${esc(stay.area)} · ${stay.dates}</span></div>
+      <a class="btn" href="${mapsUrl(stay.map)}" target="_blank" rel="noopener">${ICON.map} Map</a>
+    </div>
+
+    <div class="day-actions">
+      ${route ? `<a class="btn dark" href="${route}" target="_blank" rel="noopener">${ICON.route} Day route in Google Maps</a>` : ''}
+      <button class="btn" data-prev="${d.n}">← Prev</button>
+      <button class="btn" data-next="${d.n}">Next →</button>
+    </div>
+
+    <div class="filters">
+      <span class="chip${filterCat === 'all' ? ' on' : ''}" data-cat="all">All</span>
+      ${cats.map(c => `<span class="chip${filterCat === c ? ' on' : ''}" data-cat="${c}">${CAT_LABEL[c]}</span>`).join('')}
+      <span class="spacer"></span>
+      <span class="chip${hideSkip ? ' on' : ''}" data-hideskip="1">Hide skipped</span>
+    </div>
+
+    <div class="timeline">
+      ${d.items.map(it => renderItem(it)).join('')}
+    </div>
+
+    <div class="notes">
+      <label>Notes for this day (shared)</label>
+      <textarea data-note="${d.id}" placeholder="Reservation numbers, who's in, timing changes…">${esc((state.notes || {})[d.id] || '')}</textarea>
+    </div>
+  `;
+}
+
+function renderItem(it) {
+  const st = statusOf(it);
+  const votes = (state.votes && state.votes[it.id]) || {};
+  const voters = Object.keys(votes).filter(k => votes[k]);
+  const hidden = (filterCat !== 'all' && it.cat !== filterCat) || (hideSkip && st === 'skip');
+  return `
+    <div class="item${it.hl ? ' hl' : ''}${hidden ? ' hidden' : ''}" data-id="${it.id}" data-status="${st}">
+      <div class="card">
+        <div class="card-top">
+          ${it.time ? `<span class="time editable" contenteditable="true" data-field="time.${it.id}">${esc(field('time.' + it.id, it.time))}</span>` : `<span class="time"></span>`}
+          <span class="title"><span class="editable" contenteditable="true" data-field="title.${it.id}">${esc(field('title.' + it.id, it.title))}</span>${it.jp ? `<span class="jp">${esc(it.jp)}</span>` : ''}</span>
+        </div>
+        <div class="desc editable" contenteditable="true" data-field="desc.${it.id}">${esc(field('desc.' + it.id, it.desc))}</div>
+        ${it.warn ? `<div class="warn">${esc(it.warn)}</div>` : ''}
+        ${it.alts ? `<div class="alts">${it.alts}</div>` : ''}
+        <div class="card-bottom">
+          <span class="tag tag-${it.cat}">${CAT_LABEL[it.cat]}</span>
+          <span class="tag tag-who ${it.who}">${WHO_LABEL[it.who]}</span>
+          ${it.price ? `<span class="tag tag-price">${esc(it.price)}</span>` : ''}
+          <button class="status ${st}" data-status-id="${it.id}" title="Tap to change">${STATUS_LABEL[st]}</button>
+          <span class="actions">
+            <button class="ibtn vote${me && votes[me] ? ' mine' : ''}" data-vote="${it.id}" title="Vote">${ICON.heart}<span class="n">${voters.length || ''}</span></button>
+            ${voters.length ? `<span class="voters">${voters.map(v => `<span class="av" title="${esc(personName(v))}">${initials(personName(v))}</span>`).join('')}</span>` : ''}
+            ${it.map ? `<a class="ibtn" href="${mapsUrl(it.map)}" target="_blank" rel="noopener">${ICON.map} Map</a>` : ''}
+            ${it.book ? `<a class="ibtn" href="${it.book}" target="_blank" rel="noopener">${ICON.book} Book</a>` : ''}
+          </span>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderBook() {
+  const tobook = [];
+  DAYS.forEach(d => d.items.forEach(it => { if (statusOf(it) === 'tobook') tobook.push({ d, it }); }));
+  const done = CHECKS.filter(c => state.checks && state.checks[c.id]).length;
+  return `
+    <h2 class="sec">To do</h2>
+    <h3 class="sec">Booking calendar · ${done}/${CHECKS.length} done</h3>
+    <div class="ref" style="padding:0.2rem 1rem">
+      ${CHECKS.map(c => { const on = !!(state.checks && state.checks[c.id]); return `<label class="check${on ? ' done' : ''}"><input type="checkbox" data-check="${c.id}" ${on ? 'checked' : ''}><div><span class="when">${esc(c.when)}</span><span class="ct">${esc(c.text)}</span>${c.d ? `<div class="cd">${esc(c.d)}</div>` : ''}</div></label>`; }).join('')}
+    </div>
+
+    <h3 class="sec">Still marked "to book" · ${tobook.length}</h3>
+    <div class="timeline">
+      ${tobook.length ? tobook.map(({ d, it }) => `<div class="item" data-status="tobook"><div class="card"><div class="card-top"><span class="time">${d.date.split(' ').slice(1).join(' ')}</span><span class="title"><a href="#${d.id}" style="text-decoration:none">${esc(field('title.' + it.id, it.title))}</a></span></div><div class="card-bottom"><span class="tag tag-who ${it.who}">${WHO_LABEL[it.who]}</span>${it.price ? `<span class="tag tag-price">${esc(it.price)}</span>` : ''}<button class="status tobook" data-status-id="${it.id}">To book</button><span class="actions">${it.book ? `<a class="ibtn" href="${it.book}" target="_blank" rel="noopener">${ICON.book} Book</a>` : ''}</span></div></div></div>`).join('') : '<p style="color:var(--stone)">Nothing left. Legend.</p>'}
+    </div>
+  `;
+}
+
+function renderGuide() {
+  const li = (name, d, map) => `<li><b>${name}</b>${d ? `<span class="d">${d}</span>` : ''}${map ? `<a class="ibtn m" href="${mapsUrl(map)}" target="_blank" rel="noopener">${ICON.map}</a>` : ''}</li>`;
+  return `
+    <h2 class="sec">Guide</h2>
+
+    <h3 class="sec">New Year closures cheat sheet</h3>
+    <div class="ref">
+      <ul>
+        <li><b>28 Dec Mon</b><span class="d">Everything open. Kitazawa + Jimbocho shops normal, Takumi open, Narisawa + Miura closed (Mon).</span></li>
+        <li><b>29 Dec Tue</b><span class="d">Shutdown begins. Kappabashi last safe day. Golden Gai mostly open.</span></li>
+        <li><b>30 Dec Wed</b><span class="d">Last full day for independents and small shops. Confirm Kitazawa, Kakeru, Narisawa service.</span></li>
+        <li><b>31 Dec</b><span class="d"><span class="closed">Closed:</span> independents, Golden Gai (most), banks, Toyosu. <span class="open">Open:</span> hotels, Tokyo Station, Azabudai Hills, Soho House, konbini. Shibuya countdown cancelled.</span></li>
+        <li><b>1 Jan</b><span class="d"><span class="closed">Closed:</span> all department stores, most restaurants, Rakuichi (to 4 Jan). <span class="open">Open:</span> Niseko hotel restaurants, Somoza (Fri), Hanazono lifts. Meiji Jingu = 3m people.</span></li>
+        <li><b>2 Jan</b><span class="d">Isetan, Mitsukoshi, Seibu, Lumine reopen (fukubukuro). Ginza Six, Takashimaya, Daimaru from 3 Jan.</span></li>
+        <li><b>4 to 5 Jan</b><span class="d">Japan back at work. Toyosu first tuna auction 5 Jan. Fukuoka small independents may stay shut to 6/7 Jan.</span></li>
+      </ul>
+    </div>
+
+    <h3 class="sec">Tokyo backups that seat 7</h3>
+    <div class="ref"><ul>
+      ${li('Omotesando Ukai-tei', 'Teppanyaki in Gyre, private rooms with own chef. ¥27.5 to 38.5k. Closed Wed, 1st/3rd Tue, year-end dates on their calendar. 03-5467-5252', 'Omotesando Ukai-tei')}
+      ${li('Yoroniku', 'Wagyu yakiniku, Minami-Aoyama, ¥21.5k + svc, private rooms. omakase.in monthly release', 'Yoroniku Minami-Aoyama')}
+      ${li('Yakiniku Jumbo Shirokane', 'Private rooms, no closing day, ¥15 to 25k. TableCheck', 'Yakiniku Jumbo Shirokane')}
+      ${li('Florilège', 'Azabudai Hills, one counter, ¥22k + svc, full buyout possible. Closed Mon', 'Florilege Azabudai Hills')}
+      ${li('Sézanne chef\'s table', 'Four Seasons Marunouchi, private function room, ¥60k+', 'Sezanne Four Seasons Marunouchi')}
+      ${li('Den', 'Moved to Jingumae. Private room only fits 4, main room for 7 needs the chef\'s nod. Phone only 03-6455-5433 12:00 to 17:00, 2 months out', 'Den Jingumae Tokyo')}
+    </ul></div>
+
+    <h3 class="sec">Tokyo bars + sento</h3>
+    <div class="ref"><ul>
+      ${li('The SG Club', 'Shibuya. Guzzle GF for 7, Sip B1 for 3-4. Till 03:00', 'The SG Club Shibuya')}
+      ${li('Gold Bar', 'EDITION Toranomon, lounge, reserve Fri/Sat', 'Gold Bar Tokyo EDITION Toranomon')}
+      ${li('Bar Bridge', '10F over Shibuya Crossing, listening bar, till 05:00', 'Bar Bridge Shibuya')}
+      ${li('Bar Benfiddich', 'Nishi-Shinjuku, 15 seats, max 4 per booking. Calendar opens the 20th', 'Bar Benfiddich')}
+      ${li('Bar Trench', 'Ebisu, 13 seats, groups capped at 4, no reservations', 'Bar Trench Ebisu')}
+      ${li('Koganeyu', 'Kinshicho sento, sauna, DJ bandai, craft beer. Also Koganeyu Shinjuku (new, Jul 2026)', 'Koganeyu Kinshicho')}
+      ${li('Kosugiyu Harajuku', 'Harakado B1, ¥600, closed Thu', 'Kosugiyu Harajuku')}
+      ${li('Thermae-Yu', 'Kabukicho, big spa, tattoo-friendly with seals, 24h', 'Thermae-Yu Shinjuku')}
+    </ul></div>
+
+    <h3 class="sec">Niseko backups</h3>
+    <div class="ref"><ul>
+      ${li('Park Hyatt Hanazono', '5 min from Shiguchi. China Kitchen round table 14, Teppan (closed Tue), Molière Montagne, Sushi Mitsukawa, Krug Igloo for 14 (24h notice)', 'Park Hyatt Niseko Hanazono')}
+      ${li('Meli Melo, Setsu', 'French/Italian, NY set ¥25k 30 Dec to 2 Jan, TableCheck up to 10', 'Setsu Niseko')}
+      ${li('Yukibana / Sushi Nagi, Higashiyama', 'Ritz-Carlton Reserve. Yukibana ¥40k, online to 8, 9+ call 0136-44-3491', 'Higashiyama Niseko Village Ritz-Carlton Reserve')}
+      ${li('Mame', 'Shu kaiseki, 22 seats, ~¥30k+. TableCheck + reservation@mame-restaurants.com, 7 days\' notice for changes', 'Mame Niseko')}
+      ${li('Rin', 'Lower Hirafu izakaya, private tatami rooms, phone only', 'Rin Niseko')}
+      ${li('Ezo Seafoods', 'Now pick-up only 16:00 to 20:00: crab + oyster platters for a villa night, order 10 days ahead', 'Ezo Seafoods Niseko')}
+      ${li('Kamimura', 'Listed as permanently closed on Tabelog. Kitchen by Kamimura (Hyatt House, ¥10k omakase) is the successor. Verify', 'Kitchen by Kamimura Niseko')}
+      ${li('Rakuichi soba', 'Closed 30 Dec to 4 Jan. Out for this trip', 'Rakuichi Niseko')}
+    </ul></div>
+
+    <h3 class="sec">Fukuoka backups</h3>
+    <div class="ref"><ul>
+      ${li('GohGan', '010 Bldg 1F, Fukuyama x Gaggan, two 6-pax rooms, ~¥8 to 10k, Tue to Fri', 'GohGan Fukuoka')}
+      ${li('Yamanaka Honten', 'Grand sushi-kappo, 98 seats, zashiki rooms, dinner ¥18 to 27k. 092-731-7771', 'やま中 本店 渡辺通')}
+      ${li('Sushi Sakai', '3 stars, 12 seats, ¥44k, omakase.in sells out in minutes. 7 = near buyout via concierge', 'Sushi Sakai Nishinakasu')}
+      ${li('Hanamidori Nishinakasu', 'Mizutaki, 8-seat private room, ¥4.5 to 6.5k. 092-737-9696', '華味鳥 西中洲店')}
+      ${li('Toriden Yakuin', 'Mizutaki, tatami upstairs, ¥6.6k course, TableCheck', 'Toriden Yakuin')}
+      ${li('Wine Shokudo Kon', 'Imaizumi, 60+ natural wines, ¥3 to 4k, till 02:00, no closing day', 'ワイン食堂 根 今泉')}
+      ${li('Hakata Issou', 'Foamy "cappuccino" tonkotsu, 11:00 to 24:00, queue clears after 22:00', 'Hakata Issou honten')}
+      ${li('Bar Leichhardt', '3,000+ whiskies, English-speaking owner, ¥600 cover, closed Mon', 'Bar Leichhardt Fukuoka')}
+      ${li('Karatsu day trip', 'JR 70 to 80 min: castle on the bay, Karatsu-yaki kilns, Nanatsugama caves by boat from Yobuko, squid lunch. If Itoshima gets rained off', 'Karatsu Castle')}
+    </ul></div>
+
+    <h3 class="sec">Hotels</h3>
+    <div class="ref"><ul>
+      ${STAYS.map(s => li(s.hotel, s.area + ' · ' + s.dates + (s.phone ? ' · ' + s.phone : ''), s.map)).join('')}
+    </ul></div>
+
+    <h3 class="sec">Sources</h3>
+    <div class="ref"><p style="font-size:0.8rem">Prices, hours and closing days as published Oct 2026 (Michelin, TableCheck, omakase.in, Tabelog, Time Out, venue sites). Anything marked with ! is a known risk: NY closure dates for small places are rarely published before December, confirm via concierge.</p></div>
+  `;
+}
+
+function renderCurrent(preserveFocus) {
+  const active = document.activeElement;
+  if (preserveFocus && active && (active.isContentEditable || active.tagName === 'TEXTAREA')) {
+    // someone is typing: don't blow away their caret, re-render when they blur
+    active.dataset.rerender = '1';
+    return;
+  }
+  const mainEl = $('#main');
+  let html = '';
+  if (currentTab === 'trip') html = renderOverview();
+  else if (currentTab === 'book') html = renderBook();
+  else if (currentTab === 'guide') html = renderGuide();
+  else { const d = DAYS.find(x => x.id === currentTab); html = d ? renderDay(d) : renderOverview(); }
+  mainEl.innerHTML = `<section class="panel active">${html}</section>`;
+  document.querySelectorAll('nav a').forEach(a => a.classList.toggle('active', a.dataset.tab === currentTab));
+  const navA = document.querySelector(`nav a[data-tab="${currentTab}"]`);
+  if (navA) navA.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+  $('#countdown').innerHTML = `<b>${daysToGo().label}</b>`;
+  $('#me-chip').textContent = me ? 'I am ' + personName(me) : 'Who am I?';
+}
+
+function goTo(tab, push) {
+  const valid = tab === 'trip' || tab === 'book' || tab === 'guide' || DAYS.some(d => d.id === tab);
+  currentTab = valid ? tab : 'trip';
+  if (push !== false && location.hash !== '#' + currentTab) history.replaceState(null, '', '#' + currentTab);
+  window.scrollTo({ top: 0, behavior: 'auto' });
+  renderCurrent(false);
+}
+
+/* =========================================================
+   EVENTS
+   ========================================================= */
+function debounce(fn, ms) { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; }
+const saveFieldDebounced = debounce((k, v) => setPath('fields.' + k, v), 500);
+const saveNoteDebounced = debounce((k, v) => setPath('notes.' + k, v), 600);
+const savePersonDebounced = debounce((k, v) => setPath('people.' + k, v), 500);
+
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1600); }
+
+function openWho() {
+  const pp = people();
+  $('#who-opts').innerHTML = Object.keys(pp).map(k => `<button data-who="${k}">${esc(pp[k])}</button>`).join('');
+  $('#modal').classList.add('show');
+}
+
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('a[href^="#"]');
+  if (a && !a.dataset.tab) { // internal link in content
+    const tab = a.getAttribute('href').slice(1);
+    if (tab === 'trip' || tab === 'book' || tab === 'guide' || DAYS.some(d => d.id === tab)) { e.preventDefault(); goTo(tab); }
+    return;
+  }
+  if (a && a.dataset.tab) { e.preventDefault(); goTo(a.dataset.tab); return; }
+
+  const st = e.target.closest('[data-status-id]');
+  if (st) {
+    const id = st.dataset.statusId;
+    const it = DAYS.flatMap(d => d.items).find(i => i.id === id);
+    const next = STATUS_NEXT[statusOf(it)];
+    setPath('statuses.' + id, next);
+    renderCurrent(false);
+    return;
+  }
+  const v = e.target.closest('[data-vote]');
+  if (v) {
+    if (!me) { openWho(); return; }
+    const id = v.dataset.vote;
+    const cur = Object.assign({}, (state.votes || {})[id] || {});
+    if (cur[me]) delete cur[me]; else cur[me] = true;
+    setPath('votes.' + id, cur);
+    renderCurrent(false);
+    return;
+  }
+  const who = e.target.closest('[data-who]');
+  if (who) { me = who.dataset.who; localStorage.setItem('japan-ny-me', me); $('#modal').classList.remove('show'); toast('You are ' + personName(me)); renderCurrent(false); return; }
+  if (e.target.id === 'me-chip') { openWho(); return; }
+  if (e.target.id === 'modal') { $('#modal').classList.remove('show'); return; }
+
+  const chip = e.target.closest('.chip');
+  if (chip) {
+    if (chip.dataset.cat) filterCat = chip.dataset.cat;
+    if (chip.dataset.hideskip) hideSkip = !hideSkip;
+    renderCurrent(false);
+    return;
+  }
+  const prev = e.target.closest('[data-prev]');
+  if (prev) { const n = +prev.dataset.prev; goTo(n > 1 ? 'day' + (n - 1) : 'trip'); return; }
+  const next = e.target.closest('[data-next]');
+  if (next) { const n = +next.dataset.next; goTo(n < DAYS.length ? 'day' + (n + 1) : 'book'); return; }
+});
+
+document.addEventListener('input', (e) => {
+  const el = e.target;
+  if (el.dataset.field) saveFieldDebounced(el.dataset.field, el.innerText.trim());
+  else if (el.dataset.person) savePersonDebounced(el.dataset.person, el.innerText.trim() || defaultPeople[el.dataset.person]);
+  else if (el.dataset.note) saveNoteDebounced(el.dataset.note, el.value);
+});
+document.addEventListener('change', (e) => {
+  const el = e.target;
+  if (el.dataset.check) { setPath('checks.' + el.dataset.check, el.checked); renderCurrent(false); }
+});
+document.addEventListener('focusout', (e) => {
+  if (e.target.dataset && e.target.dataset.rerender) { delete e.target.dataset.rerender; setTimeout(() => renderCurrent(false), 50); }
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && e.target.isContentEditable && !e.target.classList.contains('desc')) { e.preventDefault(); e.target.blur(); }
+});
+window.addEventListener('hashchange', () => goTo(location.hash.slice(1) || 'trip', false));
+
+/* =========================================================
+   BOOT
+   ========================================================= */
+loadLocal();
+buildNav();
+(function fixNavTop() {
+  const set = () => { document.querySelector('nav').style.top = document.getElementById('sync-banner').offsetHeight + 'px'; };
+  set(); window.addEventListener('resize', set); setTimeout(set, 500);
+})();
+(function () {
+  let tab = location.hash.slice(1);
+  if (!tab) { const dg = daysToGo(); tab = dg.day ? 'day' + dg.day : 'trip'; }
+  goTo(tab, false);
+})();
+initFirebase();
+</script>
+</body>
+</html>
